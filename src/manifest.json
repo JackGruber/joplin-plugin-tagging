@@ -1,0 +1,10 @@
+{
+	"manifest_version": 1,
+	"id": "com.jackgruber.joplin.copytags",
+	"app_min_version": "1.4",
+	"version": "1.0.0",
+	"name": "Copy Tags",
+	"description": "Copy Tages from the first selected to all other selected notes",
+	"author": "JackGruber",
+	"homepage_url": "https://github.com/JackGruber/joplin-plugin-copytags"
+}
