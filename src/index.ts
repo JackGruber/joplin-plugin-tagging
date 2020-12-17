@@ -40,8 +40,6 @@ joplin.plugins.register({
             } while (tags.has_more);
           }
         }
-
-        alert("End command");
       },
     });
 
