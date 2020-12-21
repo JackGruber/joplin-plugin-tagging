@@ -1,6 +1,6 @@
 {
   "name": "com.jackgruber.joplin.copytags",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Copy Tages from the first selected to all other selected notes",
   "scripts": {
     "dist": "webpack",
