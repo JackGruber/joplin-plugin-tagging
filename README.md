@@ -2,6 +2,8 @@
 
 Copies all tags of the first marked note to all other marked notes.
 
+<img src=img/main.jpg>
+
 ## Installation
 
 - Download the latest released JPL package (`com.jackgruber.joplin.copytags.jpl`) from [here](https://github.com/JackGruber/joplin-plugin-copytags/releases/latest)
