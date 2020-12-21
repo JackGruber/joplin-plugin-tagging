@@ -15,6 +15,10 @@ Copies all tags of the first marked note to all other marked notes.
 ## Usage
 
 - Select multiple notes (The first marked note must be the one from which the tags are to be copied)
+## Keyboard Shortcus
+
+Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the `Copy all Tags` command.
+
 ## Build
 
 To build your one version of the plugin, install node.js and run the following command `npm run dist`
