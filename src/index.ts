@@ -44,7 +44,7 @@ joplin.plugins.register({
     });
 
     await joplin.views.menuItems.create(
-      "toolsTabs",
+      "myMenuItemToolsCopyAllTags",
       "CopyAllTags",
       MenuItemLocation.Tools
     );
