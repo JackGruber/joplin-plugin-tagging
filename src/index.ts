@@ -44,9 +44,14 @@ joplin.plugins.register({
     });
 
     await joplin.views.menuItems.create(
-      "toolsTabs",
+      "myMenuItemToolsCopyAllTags",
       "CopyAllTags",
       MenuItemLocation.Tools
+    );
+    await joplin.views.menuItems.create(
+      'contextMenuItemCopyAllTags', 
+      'CopyAllTags', 
+      MenuItemLocation.NoteListContextMenu
     );
   },
 });
