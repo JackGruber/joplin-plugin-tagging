@@ -15,6 +15,10 @@ Copies all tags of the first marked note to all other marked notes.
 ## Usage
 
 - Select multiple notes (The first marked note must be the one from which the tags are to be copied)
+## Build
+
+To build your one version of the plugin, install node.js and run the following command `npm run dist`
+
 ## Links
 
 - [Joplin - Getting started with plugin development](https://joplinapp.org/api/get_started/plugins/)
