@@ -15,4 +15,9 @@ Copies all tags of the first marked note to all other marked notes.
 ## Usage
 
 - Select multiple notes (The first marked note must be the one from which the tags are to be copied)
-- Click on `Tools > Copy all Tags`
+## Links
+
+- [Joplin - Getting started with plugin development](https://joplinapp.org/api/get_started/plugins/)
+- [Joplin - Plugin API reference](https://joplinapp.org/api/references/plugin_api/classes/joplin.html)
+- [Joplin - Data API reference](https://joplinapp.org/api/references/rest_api/)
+- [Joplin - Plugin examples](https://github.com/laurent22/joplin/tree/dev/packages/app-cli/tests/support/plugins)
