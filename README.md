@@ -25,6 +25,16 @@ Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the `
 
 To build your one version of the plugin, install node.js and run the following command `npm run dist`
 
+## Changelog
+
+### v0.2.0
+
+- Add context menue
+
+### v0.1.0
+
+- First version
+
 ## Links
 
 - [Joplin - Getting started with plugin development](https://joplinapp.org/api/get_started/plugins/)
