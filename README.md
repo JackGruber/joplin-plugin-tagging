@@ -25,6 +25,12 @@ Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the `
 
 To build your one version of the plugin, install node.js and run the following command `npm run dist`
 
+## Updating the plugin framework
+
+To update the plugin framework, run `yo joplin --update`
+
+Keep in mind that doing so will overwrite all the framework-related files **outside of the "src/" directory** (your source code will not be touched).
+
 ## Changelog
 
 ### v0.2.0
