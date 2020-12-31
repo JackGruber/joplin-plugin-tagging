@@ -53,5 +53,75 @@ joplin.plugins.register({
       'CopyAllTags', 
       MenuItemLocation.NoteListContextMenu
     );
+
+    const tag_dialog = await joplin.views.dialogs.create('TagDialog');
+    await joplin.commands.register({
+      name: "CopyTagList",
+      label: "Show Tagging list",
+      enabledCondition: "noteListHasNotes",
+      execute: async () => {
+        const ids = await joplin.workspace.selectedNoteIds();
+        if (ids.length > 1) {
+          // collect all tags form the notes
+          let tags_on_notes = {};
+          for (let ids_pos = 0; ids_pos < ids.length; ids_pos++) {
+            var pageNum = 1;
+            do {
+              var tags = await joplin.data.get(["notes", ids[ids_pos], "tags"], {
+                fields: "id, title",
+                limit: 20,
+                page: pageNum++,
+              });
+              for (var tags_pos = 0; tags_pos < tags.items.length; tags_pos++) {
+                var tag_id = tags['items'][tags_pos]['id'];
+                if(typeof tags_on_notes[tag_id] === 'undefined'){
+                  tags_on_notes[tag_id] = {}
+                  tags_on_notes[tag_id]['count'] = 1;
+                  tags_on_notes[tag_id]['title'] = tags['items'][tags_pos]['title'];
+                } else {
+                  tags_on_notes[tag_id]['count'] ++;
+                }
+              }
+            } while (tags.has_more);
+          }
+
+          // create tagging list
+          let tags_status = [];
+          const tag_list = [];
+          for(var key in tags_on_notes){
+            if(tags_on_notes[key]['count'] == ids.length) {
+              tags_status[key] = 1
+              tag_list.push(`<input name="${key}" type="checkbox" value="1" onclick="ToggleTagCheckbox(this)" checked="checked" /> ${tags_on_notes[key]['title']} <br>`)
+            } else {
+              tags_status[key] = 2
+              tag_list.push(`<input name="${key}" type="checkbox" value="2" onclick="ToggleTagCheckbox(this)" class="indeterminate" /> ${tags_on_notes[key]['title']} <br>`)
+            }
+          }
+
+          await joplin.views.dialogs.setHtml(tag_dialog, `
+          <div style="overflow-wrap: break-word;">
+            <form name="tags">
+            ${tag_list.join('\n')}
+            </form>
+          </div>
+          `);
+          const result = await joplin.views.dialogs.open(tag_dialog);
+          if(result['id'] == 'ok') {
+            console.info(result)
+          }
+        }
+      },
+    });
+
+    await joplin.views.menuItems.create(
+      "myMenuItemToolsCopyTagList",
+      "CopyTagList",
+      MenuItemLocation.Tools
+    );
+    await joplin.views.menuItems.create(
+      'contextMenuItemCopyTagList', 
+      'CopyTagList', 
+      MenuItemLocation.NoteListContextMenu
+    );
   },
 });
