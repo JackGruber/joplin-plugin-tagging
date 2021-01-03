@@ -55,6 +55,8 @@ joplin.plugins.register({
     );
 
     const tag_dialog = await joplin.views.dialogs.create('TagDialog');
+    await joplin.views.dialogs.addScript(tag_dialog, 'webview.js');
+    
     await joplin.commands.register({
       name: "CopyTagList",
       label: "Show Tagging list",
