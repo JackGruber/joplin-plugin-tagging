@@ -2,7 +2,7 @@
 
 Plugin to extend the Joplin Tagging menue.
 
-<img src=img/tagging.jpg>
+<img src=img/main_tagging.jpg>
 
 ## Installation
 
