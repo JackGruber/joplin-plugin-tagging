@@ -110,8 +110,30 @@ joplin.plugins.register({
           </div>
           `);
           const result = await joplin.views.dialogs.open(tag_dialog);
+
+          // process with tagging 
           if(result['id'] == 'ok') {
-            console.info(result)
+            for(var key in result['formData']['tags']){
+              if(result['formData']['tags'][key] != tags_status[key]) {
+                if(result['formData']['tags'][key] == 0){
+                  // Remove Tag
+                  for (var i = 0; i < ids.length; i++) {
+                    await joplin.data.delete(
+                      ["tags", key, "notes", ids[i]]
+                    );
+                  }
+                } else if(result['formData']['tags'][key] == 1){
+                  // Add Tag
+                  for (var i = 0; i < ids.length; i++) {
+                    await joplin.data.post(
+                      ["tags", key, "notes"],
+                      null,
+                      { id: ids[i] }
+                    );
+                  }
+                }
+              }
+            }
           }
         }
       },
