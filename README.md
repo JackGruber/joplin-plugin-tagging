@@ -33,6 +33,10 @@ Keep in mind that doing so will overwrite all the framework-related files **outs
 
 ## Changelog
 
+### (Not Released)
+
+- Add `Show Tagging Dialog`
+
 ### v0.2.0
 
 - Add context menue
