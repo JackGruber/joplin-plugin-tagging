@@ -17,6 +17,9 @@ Plugin to extend the Joplin Tagging menue.
 - `Copy all Tags`
 - `Show Tagging list`
 
+### Copy all Tags
+
+Copies all tags of the first marked note to all other marked notes.
 
 - Select multiple notes (The first marked note must be the one from which the tags are to be copied)
 - Click on `Tools > Copy all Tags` or use the command `Copy all Tags` from the context menu
