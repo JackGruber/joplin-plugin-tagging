@@ -24,6 +24,14 @@ Copies all tags of the first marked note to all other marked notes.
 - Select multiple notes (The first marked note must be the one from which the tags are to be copied)
 - Click on `Tools > Copy all Tags` or use the command `Copy all Tags` from the context menu
 
+### Show Tagging list
+
+- Select multiple notes
+- Click on `Tools > Show Tagging list` or use the command `Show Tagging lists` from the context menu
+- Now you can remove a tag from all notes or add a tag to all notes, when the tag is not applied to all notes.
+
+   <img src=img/tagging_dialog.jpg>
+
 ## Keyboard Shortcus
 
 Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the following commands:
