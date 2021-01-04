@@ -1,8 +1,8 @@
 # Joplin Copy Tag Plugin
 
-Copies all tags of the first marked note to all other marked notes.
+Plugin to extend the Joplin Tagging menue.
 
-<img src=img/main.jpg>
+<img src=img/tagging.jpg>
 
 ## Installation
 
