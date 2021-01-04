@@ -58,8 +58,8 @@ joplin.plugins.register({
     await joplin.views.dialogs.addScript(tag_dialog, 'webview.js');
     
     await joplin.commands.register({
-      name: "CopyTagList",
-      label: "Show Tagging list",
+      name: "TaggingDialog",
+      label: "Tagging list",
       enabledCondition: "noteListHasNotes",
       execute: async () => {
         const ids = await joplin.workspace.selectedNoteIds();
@@ -140,13 +140,13 @@ joplin.plugins.register({
     });
 
     await joplin.views.menuItems.create(
-      "myMenuItemToolsCopyTagList",
-      "CopyTagList",
+      "MenuItemToolsTaggingDialog",
+      "TaggingDialog",
       MenuItemLocation.Tools
     );
     await joplin.views.menuItems.create(
-      'contextMenuItemCopyTagList', 
-      'CopyTagList', 
+      'contextMenuItemTaggingDialog', 
+      'TaggingDialog', 
       MenuItemLocation.NoteListContextMenu
     );
   },
