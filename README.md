@@ -23,7 +23,10 @@ Plugin to extend the Joplin Tagging menue.
 
 ## Keyboard Shortcus
 
-Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the `Copy all Tags` command.
+Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the following commands:
+
+- `Copy all Tags`
+- `Show Tagging list`
 
 ## Build
 
