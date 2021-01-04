@@ -12,7 +12,11 @@ Plugin to extend the Joplin Tagging menue.
 - Click Install plugin and select the downloaded jpl file
 - Restart Joplin to enable the plugin
 
-## Usage
+## Commands
+
+- `Copy all Tags`
+- `Show Tagging list`
+
 
 - Select multiple notes (The first marked note must be the one from which the tags are to be copied)
 - Click on `Tools > Copy all Tags` or use the command `Copy all Tags` from the context menu
