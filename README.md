@@ -55,11 +55,11 @@ Keep in mind that doing so will overwrite all the framework-related files **outs
 
 - Add `Tagging list` command
 
-### v0.2.0
+### v0.2.0 (2020-12-21)
 
 - Add context menue
 
-### v0.1.0
+### v0.1.0 (2020-12-17)
 
 - First version
 
