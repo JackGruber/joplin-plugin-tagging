@@ -51,6 +51,12 @@ export default class JoplinViewsDialogs {
      * Sets the dialog buttons.
      */
     setButtons(handle: ViewHandle, buttons: ButtonSpec[]): Promise<ButtonSpec[]>;
+    
+    /**
+     * Adds and loads a new JS or CSS files into the panel.
+     */
+    addScript(handle: ViewHandle, scriptPath: string): Promise<void>;
+    
     /**
      * Opens the dialog
      */
