@@ -1,8 +1,8 @@
 # Joplin Copy Tag Plugin
 
-Copies all tags of the first marked note to all other marked notes.
+Plugin to extend the Joplin tagging menu with a coppy all tags and tagging list with more control.
 
-<img src=img/main.jpg>
+<img src=img/main_tagging.jpg>
 
 ## Installation
 
@@ -12,14 +12,32 @@ Copies all tags of the first marked note to all other marked notes.
 - Click Install plugin and select the downloaded jpl file
 - Restart Joplin to enable the plugin
 
-## Usage
+## Commands
+
+- `Copy all Tags`
+- `Show Tagging list`
+
+### Copy all Tags
+
+Copies all tags of the first marked note to all other marked notes.
 
 - Select multiple notes (The first marked note must be the one from which the tags are to be copied)
 - Click on `Tools > Copy all Tags` or use the command `Copy all Tags` from the context menu
 
+### Tagging list
+
+- Select multiple notes
+- Click on `Tools > Tagging list` or use the command `Tagging lists` from the context menu
+- Now you can remove a tag from all notes or add a tag to all notes, when the tag is not applied to all notes.
+
+   <img src=img/tagging_dialog.jpg>
+
 ## Keyboard Shortcus
 
-Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the `Copy all Tags` command.
+Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the following commands:
+
+- `Copy all Tags`
+- `Tagging list`
 
 ## Build
 
@@ -33,11 +51,17 @@ Keep in mind that doing so will overwrite all the framework-related files **outs
 
 ## Changelog
 
-### v0.2.0
+### v0.3.0 (2021-01-05)
+
+❗ Requires at least Joplin v1.6.2 ❗
+
+- Add `Tagging list` command
+
+### v0.2.0 (2020-12-21)
 
 - Add context menue
 
-### v0.1.0
+### v0.1.0 (2020-12-17)
 
 - First version
 
