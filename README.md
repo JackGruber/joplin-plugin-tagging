@@ -51,9 +51,9 @@ Keep in mind that doing so will overwrite all the framework-related files **outs
 
 ## Changelog
 
-### (Not Released)
+### v0.3.0 (2021-01-05)
 
-❗ Requires at least Joplin v1.5.xx ❗
+❗ Requires at least Joplin v1.6.2 ❗
 
 - Add `Tagging list` command
 
