@@ -6,7 +6,7 @@ Plugin to extend the Joplin tagging menu with a coppy all tags and tagging list 
 
 ## Installation
 
-- Download the latest released JPL package (`com.jackgruber.joplin.copytags.jpl`) from [here](https://github.com/JackGruber/joplin-plugin-copytags/releases/latest)
+- Download the latest released JPL package (`io.github.jackgruber.copytags.jpl`) from [here](https://github.com/JackGruber/joplin-plugin-copytags/releases/latest)
 - Open Joplin
 - Go to `Tools > Options > Plugins`
 - Click Install plugin and select the downloaded jpl file
@@ -50,6 +50,10 @@ To update the plugin framework, run `yo joplin --update`
 Keep in mind that doing so will overwrite all the framework-related files **outside of the "src/" directory** (your source code will not be touched).
 
 ## Changelog
+
+### v0.3.1 (2021-01-06)
+
+- Change of the Plugin ID for Joplin
 
 ### v0.3.0 (2021-01-05)
 
