@@ -1,5 +1,5 @@
 {
-  "name": "com.jackgruber.joplin.copytags",
+  "name": "joplin-plugin.copytags",
   "version": "0.3.0",
   "description": "Plugin to extend the Joplin tagging menu with a coppy all tags and tagging list with more control.",
   "scripts": {
