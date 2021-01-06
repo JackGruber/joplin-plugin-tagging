@@ -1,6 +1,6 @@
 {
 	"manifest_version": 1,
-	"id": "com.jackgruber.joplin.copytags",
+	"id": "joplin-plugin.copytags",
 	"app_min_version": "1.6.2",
 	"version": "0.3.0",
 	"name": "Copy Tags",
