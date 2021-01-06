@@ -51,6 +51,10 @@ Keep in mind that doing so will overwrite all the framework-related files **outs
 
 ## Changelog
 
+### v0.3.1 (2021-01-06)
+
+- Change of the Plugin ID for Joplin
+
 ### v0.3.0 (2021-01-05)
 
 ❗ Requires at least Joplin v1.6.2 ❗
