@@ -51,6 +51,10 @@ Keep in mind that doing so will overwrite all the framework-related files **outs
 
 ## Changelog
 
+### v0.3.2 (2021-01-08)
+
+- Fix: Missing js File in JPL
+
 ### v0.3.1 (2021-01-06)
 
 - Change of the Plugin ID for Joplin
