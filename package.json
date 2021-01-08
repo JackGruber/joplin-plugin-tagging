@@ -4,14 +4,15 @@
   "description": "Plugin to extend the Joplin tagging menu with a coppy all tags and tagging list with more control.",
   "scripts": {
     "dist": "webpack",
-    "prepare": "npm run dist"
+    "prepare": "npm run dist",
+    "update": "npm install -g generator-joplin && yo joplin --update"
   },
   "keywords": [
     "joplin-plugin"
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^14.14.20",
+    "@types/node": "^14.0.14",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^6.1.0",
     "fs-extra": "^9.0.1",
