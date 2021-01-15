@@ -53,9 +53,7 @@ To build your one version of the plugin, install node.js and run the following c
 
 ## Updating the plugin framework
 
-To update the plugin framework, run `yo joplin --update`
-
-Keep in mind that doing so will overwrite all the framework-related files **outside of the "src/" directory** (your source code will not be touched).
+To update the plugin framework, run `npm run update`
 
 ## Changelog
 
