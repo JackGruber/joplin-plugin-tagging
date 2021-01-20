@@ -57,6 +57,10 @@ To update the plugin framework, run `npm run update`
 
 ## Changelog
 
+### v0.3.3 (2021-01-20)
+
+- Add processing message
+
 ### v0.3.2 (2021-01-08)
 
 - Fix: Missing js File in JPL
