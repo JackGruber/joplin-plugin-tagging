@@ -7,5 +7,6 @@
 	"description": "Plugin to extend the Joplin tagging menu with a copy all tags and tagging list with more control.",
 	"author": "JackGruber",
 	"homepage_url": "https://github.com/JackGruber/joplin-plugin-copytags",
-	"repository_url": "https://github.com/JackGruber/joplin-plugin-copytags"
+	"repository_url": "https://github.com/JackGruber/joplin-plugin-copytags",
+	"keywords": ["tag", "tags", "tagging", "duplicate", "copy"]
 }
