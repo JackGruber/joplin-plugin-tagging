@@ -1,5 +1,6 @@
 import joplin from "api";
 import { MenuItem, MenuItemLocation, SettingItemType } from "api/types";
+import JoplinCommands from "api";
 
 joplin.plugins.register({
   onStart: async function () {
@@ -20,6 +21,8 @@ joplin.plugins.register({
               "Copy all tags from " + note["title"] + " ?"
             )) == 0
           ) {
+            await joplin.commands.execute("showModalMessage","Please wait, tags are copied");
+
             var pageNum = 1;
             do {
               var tags = await joplin.data.get(["notes", Ids[0], "tags"], {
@@ -37,6 +40,8 @@ joplin.plugins.register({
                 }
               }
             } while (tags.has_more);
+
+            await joplin.commands.execute("hideModalMessage");
           }
         }
       },
@@ -110,8 +115,10 @@ joplin.plugins.register({
           `);
           const result = await joplin.views.dialogs.open(tag_dialog);
 
-          // process with tagging 
+          // process with tagging
           if(result['id'] == 'ok') {
+            await joplin.commands.execute("showModalMessage","Please wait, tagging will be executed");
+
             for(var key in result['formData']['tags']){
               if(result['formData']['tags'][key] != tags_status[key]) {
                 if(result['formData']['tags'][key] == 0){
@@ -133,6 +140,8 @@ joplin.plugins.register({
                 }
               }
             }
+
+            await joplin.commands.execute("hideModalMessage");
           }
         }
       },
