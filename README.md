@@ -32,9 +32,9 @@ Copies all tags of the first marked note to all other marked notes.
 
    <img src=img/tagging_dialog.jpg>
 
-## Keyboard Shortcus
+## Keyboard Shortcuts
 
-Under `Options > Keyboard Shortcus` you can assign a keyboard shortcut for the following commands:
+Under `Options > Keyboard Shortcuts` you can assign a keyboard shortcut for the following commands:
 
 - `Copy all Tags`
 - `Tagging list`
