@@ -8,7 +8,6 @@ joplin.plugins.register({
     await joplin.commands.register({
       name: "CopyAllTags",
       label: "Copy all Tags",
-      iconName: "fas fa-music",
       enabledCondition: "noteListHasNotes",
       execute: async () => {
         var Ids = await joplin.workspace.selectedNoteIds();
