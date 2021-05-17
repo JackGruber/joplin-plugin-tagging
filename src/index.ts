@@ -53,9 +53,9 @@ joplin.plugins.register({
       MenuItemLocation.NoteListContextMenu
     );
 
-    const tag_dialog = await joplin.views.dialogs.create("TagDialog");
-    await joplin.views.dialogs.addScript(tag_dialog, "webview.js");
-    await joplin.views.dialogs.addScript(tag_dialog, "webview.css");
+    const tagDialog = await joplin.views.dialogs.create("TagDialog");
+    await joplin.views.dialogs.addScript(tagDialog, "webview.js");
+    await joplin.views.dialogs.addScript(tagDialog, "webview.css");
 
     await joplin.commands.register({
       name: "TaggingDialog",
@@ -111,7 +111,7 @@ joplin.plugins.register({
           }
 
           await joplin.views.dialogs.setHtml(
-            tag_dialog,
+            tagDialog,
             `
           <div id="copytags">
             <form name="tags">
@@ -120,7 +120,7 @@ joplin.plugins.register({
           </div>
           `
           );
-          const result = await joplin.views.dialogs.open(tag_dialog);
+          const result = await joplin.views.dialogs.open(tagDialog);
 
           // process with tagging
           if (result["id"] == "ok") {
