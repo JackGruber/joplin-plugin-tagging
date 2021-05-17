@@ -98,13 +98,13 @@ joplin.plugins.register({
             if (tags_on_notes[key]["count"] == ids.length) {
               tags_status[key] = 1;
               tag_list.push(
-                `<input type="checkbox" value="1" onclick="ToggleTagCheckbox(this, '${key}')" checked="checked" /> ${tags_on_notes[key]["title"]} <br>`
+                `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${tags_on_notes[key]["title"]} <br>`
               );
               tag_list.push(`<input type="hidden" name="${key}" value="1">`);
             } else {
               tags_status[key] = 2;
               tag_list.push(
-                `<input type="checkbox" value="2" onclick="ToggleTagCheckbox(this, '${key}')" class="indeterminate" /> ${tags_on_notes[key]["title"]} <br>`
+                `<input type="checkbox" value="2" tagId="${key}" class="tagCheckBox indeterminate" /> ${tags_on_notes[key]["title"]} <br>`
               );
               tag_list.push(`<input type="hidden" name="${key}" value="2">`);
             }
