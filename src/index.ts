@@ -56,6 +56,7 @@ joplin.plugins.register({
 
     const tag_dialog = await joplin.views.dialogs.create('TagDialog');
     await joplin.views.dialogs.addScript(tag_dialog, 'webview.js');
+    await joplin.views.dialogs.addScript(tag_dialog, 'webview.css')
     
     await joplin.commands.register({
       name: "TaggingDialog",
@@ -103,7 +104,7 @@ joplin.plugins.register({
           }
 
           await joplin.views.dialogs.setHtml(tag_dialog, `
-          <div style="overflow-wrap: break-word;">
+          <div id="copytags">
             <form name="tags">
             ${tag_list.join('\n')}
             </form>
