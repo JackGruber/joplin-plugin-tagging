@@ -8,7 +8,7 @@ joplin.plugins.register({
 
     await joplin.commands.register({
       name: "CopyAllTags",
-      label: "Copy all Tags",
+      label: "Copy all tags",
       enabledCondition: "noteListHasNotes",
       execute: async () => tagging.copyAllTags() ,
     });
