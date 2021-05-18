@@ -1,5 +1,6 @@
 import joplin from "api";
 import { MenuItemLocation } from "api/types";
+import { tagging } from "./tagging";
 
 joplin.plugins.register({
   onStart: async function () {
@@ -120,6 +121,7 @@ joplin.plugins.register({
           </div>
           `
           );
+          joplin.views.panels.onMessage(tagDialog, async (msg) => tagging.processDialogMsg(msg));
           const result = await joplin.views.dialogs.open(tagDialog);
 
           // process with tagging
