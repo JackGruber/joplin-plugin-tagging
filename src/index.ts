@@ -63,15 +63,15 @@ joplin.plugins.register({
       label: "Tagging list",
       enabledCondition: "noteListHasNotes",
       execute: async () => {
-        const ids = await joplin.workspace.selectedNoteIds();
-        if (ids.length > 1) {
+        const noteIds = await joplin.workspace.selectedNoteIds();
+        if (noteIds.length > 1) {
           // collect all tags form the notes
           let tags_on_notes = {};
-          for (let ids_pos = 0; ids_pos < ids.length; ids_pos++) {
+          for (let ids_pos = 0; ids_pos < noteIds.length; ids_pos++) {
             var pageNum = 1;
             do {
               var tags = await joplin.data.get(
-                ["notes", ids[ids_pos], "tags"],
+                ["notes", noteIds[ids_pos], "tags"],
                 {
                   fields: "id, title",
                   limit: 20,
@@ -96,7 +96,7 @@ joplin.plugins.register({
           let tags_status = [];
           const tag_list = [];
           for (var key in tags_on_notes) {
-            if (tags_on_notes[key]["count"] == ids.length) {
+            if (tags_on_notes[key]["count"] == noteIds.length) {
               tags_status[key] = 1;
               tag_list.push(
                 `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${tags_on_notes[key]["title"]} <br>`
@@ -130,14 +130,14 @@ joplin.plugins.register({
               if (result["formData"]["tags"][key] != tags_status[key]) {
                 if (result["formData"]["tags"][key] == 0) {
                   // Remove Tag
-                  for (var i = 0; i < ids.length; i++) {
-                    await joplin.data.delete(["tags", key, "notes", ids[i]]);
+                  for (var i = 0; i < noteIds.length; i++) {
+                    await joplin.data.delete(["tags", key, "notes", noteIds[i]]);
                   }
                 } else if (result["formData"]["tags"][key] == 1) {
                   // Add Tag
-                  for (var i = 0; i < ids.length; i++) {
+                  for (var i = 0; i < noteIds.length; i++) {
                     await joplin.data.post(["tags", key, "notes"], null, {
-                      id: ids[i],
+                      id: noteIds[i],
                     });
                   }
                 }
