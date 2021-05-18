@@ -13,7 +13,7 @@ export namespace tagging {
       });
       if (
         (await joplin.views.dialogs.showMessageBox(
-          "Copy all tags from " + note["title"] + " ?"
+          `Copy all tags from ${note["title"]}?`
         )) == 0
       ) {
         var pageNum = 1;
