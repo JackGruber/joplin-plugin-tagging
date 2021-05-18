@@ -11,9 +11,9 @@ joplin.plugins.register({
       label: "Copy all Tags",
       enabledCondition: "noteListHasNotes",
       execute: async () => {
-        var Ids = await joplin.workspace.selectedNoteIds();
-        if (Ids.length > 1) {
-          const note = await joplin.data.get(["notes", Ids[0]], {
+        var noteIds = await joplin.workspace.selectedNoteIds();
+        if (noteIds.length > 1) {
+          const note = await joplin.data.get(["notes", noteIds[0]], {
             fields: ["id", "title"],
           });
           if (
@@ -23,17 +23,17 @@ joplin.plugins.register({
           ) {
             var pageNum = 1;
             do {
-              var tags = await joplin.data.get(["notes", Ids[0], "tags"], {
+              var tags = await joplin.data.get(["notes", noteIds[0], "tags"], {
                 fields: "id",
                 limit: 10,
                 page: pageNum++,
               });
               for (var a = 0; a < tags.items.length; a++) {
-                for (var i = 1; i < Ids.length; i++) {
+                for (var i = 1; i < noteIds.length; i++) {
                   await joplin.data.post(
                     ["tags", tags.items[a].id, "notes"],
                     null,
-                    { id: Ids[i] }
+                    { id: noteIds[i] }
                   );
                 }
               }
