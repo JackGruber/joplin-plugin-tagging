@@ -35,40 +35,8 @@ joplin.plugins.register({
         if (noteIds.length > 1) {
           const taggingInfo = await tagging.getTaggingInfo(noteIds);
 
-          // create tagging list
-          const tag_list = [];
-          for (const key in taggingInfo) {
-            if (taggingInfo[key]["status"] === 1) {
-              tag_list.push(
-                `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${taggingInfo[key]["title"]} <br>`
-              );
-              tag_list.push(`<input type="hidden" name="${key}" value="1">`);
-            } else {
-              tag_list.push(
-                `<input type="checkbox" value="2" tagId="${key}" class="tagCheckBox indeterminate" /> ${taggingInfo[key]["title"]} <br>`
-              );
-              tag_list.push(`<input type="hidden" name="${key}" value="2">`);
-            }
-          }
+          const result = await tagging.showTaggingDialog(taggingInfo);
 
-          await joplin.views.dialogs.setHtml(
-            tagDialog,
-            `
-          <div id="copytags">
-            <input id="query-input" type="text" autofocus>
-            <ul id="search-results"></ul>
-            <div>
-              <form name="tags">
-              ${tag_list.join("\n")}
-              </form>
-            <div>
-          </div>
-          `
-          );
-          joplin.views.panels.onMessage(tagDialog, async (msg) => tagging.processDialogMsg(msg));
-          const result = await joplin.views.dialogs.open(tagDialog);
-
-          // process with tagging
           if (result["id"] == "ok") {
             await tagging.processTags(noteIds, result["formData"]["tags"], taggingInfo);
           }

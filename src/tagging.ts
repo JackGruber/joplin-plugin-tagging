@@ -4,6 +4,42 @@ import { ResultMessage, TagResult, Tag, SearchMessage } from "./type";
 export let tagDialog: string;
 
 export namespace tagging {
+  export async function showTaggingDialog(taggingInfo) {
+    const tagList = [];
+    for (const key in taggingInfo) {
+      if (taggingInfo[key]["status"] === 1) {
+        tagList.push(
+          `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${taggingInfo[key]["title"]} <br>`
+        );
+        tagList.push(`<input type="hidden" name="${key}" value="1">`);
+      } else {
+        tagList.push(
+          `<input type="checkbox" value="2" tagId="${key}" class="tagCheckBox indeterminate" /> ${taggingInfo[key]["title"]} <br>`
+        );
+        tagList.push(`<input type="hidden" name="${key}" value="2">`);
+      }
+    }
+
+    await joplin.views.dialogs.setHtml(
+      tagDialog,
+      `
+    <div id="copytags">
+      <input id="query-input" type="text" autofocus>
+      <ul id="search-results"></ul>
+      <div>
+        <form name="tags">
+        ${tagList.join("\n")}
+        </form>
+      <div>
+    </div>
+    `
+    );
+    joplin.views.panels.onMessage(tagDialog, async (msg) =>
+      tagging.processDialogMsg(msg)
+    );
+    return await joplin.views.dialogs.open(tagDialog);
+  }
+
   export async function getTaggingInfo(noteIds: string[]): Promise<any> {
     let taggingInfo = {};
     for (const noteId of noteIds) {
