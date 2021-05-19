@@ -1,7 +1,22 @@
+import { TagSearch, ResultMessage } from "./type";
+
+declare const webviewApi: any;
+
 class CopytagsDialog {
+  resultMessage: ResultMessage;
+
   constructor() {
     this.setCheckboxIndeterminate();
     this.setOnClickEventTagCheckBox();
+    this.setSearchBoxEvent();
+  }
+
+  setSearchBoxEvent() {
+    const queryInput = document.getElementById('query-input') as HTMLInputElement;
+    queryInput.addEventListener('input', event => {
+        event.preventDefault();
+        this.searchTag(queryInput.value);
+    });
   }
 
   setCheckboxIndeterminate() {
@@ -53,6 +68,34 @@ class CopytagsDialog {
       tagCheckBox[i].addEventListener("click", (event) =>
         this.toggleTagCheckbox(event)
       );
+    }
+  }
+
+  async searchTag(query: string) {
+    this.resultMessage = await webviewApi.postMessage({
+      type: "tagSearch",
+      query: query,
+    } as TagSearch);
+
+    this.showTagSearch();
+  }
+
+  showTagSearch() {
+    const searchResults = document.getElementById('search-results');
+    searchResults.innerText = '';
+
+    if (this.resultMessage) {
+      for (let i = 0; i < this.resultMessage.result.length; i++) {
+          const searchResult = this.resultMessage.result[i];
+          const row = document.createElement('li');
+          row.setAttribute('class', 'search-result-row');
+          searchResults.appendChild(row);
+
+          const tagName = document.createElement('div');
+          tagName.setAttribute('class', 'resource-name-cell');
+          tagName.innerText = searchResult.title;
+          row.appendChild(tagName);
+      }
     }
   }
 }

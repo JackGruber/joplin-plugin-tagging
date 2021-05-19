@@ -83,9 +83,13 @@ joplin.plugins.register({
             tagDialog,
             `
           <div id="copytags">
-            <form name="tags">
-            ${tag_list.join("\n")}
-            </form>
+            <input id="query-input" type="text" autofocus>
+            <ul id="search-results"></ul>
+            <div>
+              <form name="tags">
+              ${tag_list.join("\n")}
+              </form>
+            <div>
           </div>
           `
           );
