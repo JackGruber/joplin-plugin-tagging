@@ -4,6 +4,7 @@ declare const webviewApi: any;
 
 class CopytagsDialog {
   resultMessage: ResultMessage;
+  autocompleteCurrentFocus: number;
 
   constructor() {
     this.setCheckboxIndeterminate();
@@ -24,6 +25,41 @@ class CopytagsDialog {
       event.preventDefault();
       this.searchTag(queryInput.value);
     });
+
+    queryInput.addEventListener("keydown", (event) => {
+      this.navigateAutocompleteList(event);
+    });
+  }
+
+  navigateAutocompleteList(event) {
+    let autocompleteListe = document.getElementById('autocomplete-list');
+    if(!autocompleteListe) return;
+    let autocompleteItems = autocompleteListe.getElementsByTagName('div');
+    if (event.keyCode == 40) {
+      this.autocompleteCurrentFocus ++;
+      this.markActive(autocompleteItems);
+    } else if (event.keyCode == 38) {
+      this.autocompleteCurrentFocus --;
+      this.markActive(autocompleteItems);
+    } else if (event.keyCode == 13) {
+      event.preventDefault(); // prevent default action (submitting form)
+      autocompleteItems[this.autocompleteCurrentFocus].click();
+      console.log("Enter")
+    }
+  }
+
+  removeActive(x) {
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+
+  markActive(x) {
+    if (!x) return false;
+    this.removeActive(x);
+    if (this.autocompleteCurrentFocus >= x.length) this.autocompleteCurrentFocus = 0;
+    if (this.autocompleteCurrentFocus < 0) this.autocompleteCurrentFocus = (x.length - 1);
+    x[this.autocompleteCurrentFocus].classList.add("autocomplete-active");
   }
 
   setCheckboxIndeterminate() {
@@ -90,10 +126,11 @@ class CopytagsDialog {
   showTagSearch() {
     const searchResults = document.getElementById("autocomplete");
     this.removeAutocompleteItems();
+    this.autocompleteCurrentFocus = -1;
     if (this.resultMessage) {
       const autocompleteItems = document.createElement("div");
       autocompleteItems.setAttribute("class", "autocomplete-items");
-      autocompleteItems.setAttribute("id", "autocomplete-items");
+      autocompleteItems.setAttribute("id", "autocomplete-list");
       searchResults.appendChild(autocompleteItems);
       for (const tag of this.resultMessage.result) {
         const item = document.createElement("div");
