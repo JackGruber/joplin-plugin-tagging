@@ -4,7 +4,14 @@ declare const webviewApi: any;
 
 class CopytagsDialog {
   resultMessage: ResultMessage;
-  autocompleteCurrentFocus: number;
+  debounce(func: Function, timeout = 300) {
+    let timer: any;
+    return (...args: any[]) => {
+        clearTimeout(timer);
+        console.log("clear")
+        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
 
   constructor() {
     this.setCheckboxIndeterminate();
@@ -21,10 +28,10 @@ class CopytagsDialog {
     const queryInput = document.getElementById(
       "query-input"
     ) as HTMLInputElement;
-    queryInput.addEventListener("input", (event) => {
-      event.preventDefault();
+
+    document.addEventListener("input",(this.debounce(function (event) {
       this.searchTag(queryInput.value);
-    });
+    }, 250)));
 
     queryInput.addEventListener("keydown", (event) => {
       this.navigateAutocompleteList(event);
