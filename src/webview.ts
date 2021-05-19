@@ -98,6 +98,7 @@ class CopytagsDialog {
       for (const tag of this.resultMessage.result) {
         const item = document.createElement("div");
         item.setAttribute("tagId", tag.id);
+        item.setAttribute("tagTitle", tag.title);
         item.innerHTML = tag.title;
         item.addEventListener("click", (event) => {
           this.selectTag(event)
@@ -110,6 +111,9 @@ class CopytagsDialog {
   selectTag(event) {
     const element = event.target;
     const tagId = element.getAttribute("tagId");
+    const tagTitle = element.getAttribute("tagTitle");
+    console.log(tagId)
+    console.log(tagTitle)
   }
 
   removeAutocompleteItems() {
