@@ -4,6 +4,26 @@ import { ResultMessage, TagResult, Tag, SearchMessage } from "./type";
 export let tagDialog: string;
 
 export namespace tagging {
+  export async function processTags(noteIds: string[], tags, tagStatus) {
+    for (var key in tags) {
+      if (tags[key] != tagStatus[key]) {
+        if (tags[key] == 0) {
+          // Remove Tag
+          for (var i = 0; i < noteIds.length; i++) {
+            await joplin.data.delete(["tags", key, "notes", noteIds[i]]);
+          }
+        } else if (tags[key] == 1) {
+          // Add Tag
+          for (var i = 0; i < noteIds.length; i++) {
+            await joplin.data.post(["tags", key, "notes"], null, {
+              id: noteIds[i],
+            });
+          }
+        }
+      }
+    }
+  }
+
   export async function processDialogMsg(
     msg: SearchMessage
   ): Promise<ResultMessage> {

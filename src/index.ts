@@ -61,17 +61,17 @@ joplin.plugins.register({
           }
 
           // create tagging list
-          let tags_status = [];
+          let tagStatus = [];
           const tag_list = [];
           for (var key in tags_on_notes) {
             if (tags_on_notes[key]["count"] == noteIds.length) {
-              tags_status[key] = 1;
+              tagStatus[key] = 1;
               tag_list.push(
                 `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${tags_on_notes[key]["title"]} <br>`
               );
               tag_list.push(`<input type="hidden" name="${key}" value="1">`);
             } else {
-              tags_status[key] = 2;
+              tagStatus[key] = 2;
               tag_list.push(
                 `<input type="checkbox" value="2" tagId="${key}" class="tagCheckBox indeterminate" /> ${tags_on_notes[key]["title"]} <br>`
               );
@@ -98,23 +98,7 @@ joplin.plugins.register({
 
           // process with tagging
           if (result["id"] == "ok") {
-            for (var key in result["formData"]["tags"]) {
-              if (result["formData"]["tags"][key] != tags_status[key]) {
-                if (result["formData"]["tags"][key] == 0) {
-                  // Remove Tag
-                  for (var i = 0; i < noteIds.length; i++) {
-                    await joplin.data.delete(["tags", key, "notes", noteIds[i]]);
-                  }
-                } else if (result["formData"]["tags"][key] == 1) {
-                  // Add Tag
-                  for (var i = 0; i < noteIds.length; i++) {
-                    await joplin.data.post(["tags", key, "notes"], null, {
-                      id: noteIds[i],
-                    });
-                  }
-                }
-              }
-            }
+            await tagging.processTags(noteIds, result["formData"]["tags"], tagStatus);
           }
         }
       },
