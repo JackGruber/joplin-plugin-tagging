@@ -36,7 +36,6 @@ joplin.plugins.register({
           const taggingInfo = await tagging.getTaggingInfo(noteIds);
 
           // create tagging list
-          let tagStatus = [];
           const tag_list = [];
           for (const key in taggingInfo) {
             if (taggingInfo[key]["status"] === 1) {
