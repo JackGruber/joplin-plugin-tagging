@@ -93,6 +93,7 @@ class CopytagsDialog {
     if (this.resultMessage) {
       const autocompleteItems = document.createElement("div");
       autocompleteItems.setAttribute("class", "autocomplete-items");
+      autocompleteItems.setAttribute("id", "autocomplete-items");
       searchResults.appendChild(autocompleteItems);
       for (const tag of this.resultMessage.result) {
         const item = document.createElement("div");
