@@ -24,7 +24,11 @@ export namespace tagging {
       tagDialog,
       `
     <div id="copytags">
-      <input id="query-input" type="text" autofocus>
+      <form name="tagSearch">
+        <div class="autocomplete">
+          <input id="query-input" type="text" name="addTag" placeholder="Tag search" autofocus>
+        </div>
+      </form>
       <ul id="search-results"></ul>
       <div>
         <form name="tags">

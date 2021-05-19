@@ -9,13 +9,20 @@ class CopytagsDialog {
     this.setCheckboxIndeterminate();
     this.setOnClickEventTagCheckBox();
     this.setSearchBoxEvent();
+
+    // Remove autocomplete items on document click
+    document.addEventListener("click", (event) => {
+      this.removeAutocompleteItems();
+    });
   }
 
   setSearchBoxEvent() {
-    const queryInput = document.getElementById('query-input') as HTMLInputElement;
-    queryInput.addEventListener('input', event => {
-        event.preventDefault();
-        this.searchTag(queryInput.value);
+    const queryInput = document.getElementById(
+      "query-input"
+    ) as HTMLInputElement;
+    queryInput.addEventListener("input", (event) => {
+      event.preventDefault();
+      this.searchTag(queryInput.value);
     });
   }
 
@@ -81,21 +88,24 @@ class CopytagsDialog {
   }
 
   showTagSearch() {
-    const searchResults = document.getElementById('search-results');
-    searchResults.innerText = '';
-
+    const searchResults = document.getElementsByClassName("autocomplete")[0];
+    this.removeAutocompleteItems();
     if (this.resultMessage) {
-      for (let i = 0; i < this.resultMessage.result.length; i++) {
-          const searchResult = this.resultMessage.result[i];
-          const row = document.createElement('li');
-          row.setAttribute('class', 'search-result-row');
-          searchResults.appendChild(row);
-
-          const tagName = document.createElement('div');
-          tagName.setAttribute('class', 'resource-name-cell');
-          tagName.innerText = searchResult.title;
-          row.appendChild(tagName);
+      const autocompleteItems = document.createElement("div");
+      autocompleteItems.setAttribute("class", "autocomplete-items");
+      searchResults.appendChild(autocompleteItems);
+      for (const tag of this.resultMessage.result) {
+        const item = document.createElement("div");
+        item.innerHTML = tag.title;
+        autocompleteItems.appendChild(item);
       }
+    }
+  }
+
+  removeAutocompleteItems() {
+    const items = document.getElementsByClassName("autocomplete-items");
+    for (const item of items) {
+      item.parentNode.removeChild(item);
     }
   }
 }
