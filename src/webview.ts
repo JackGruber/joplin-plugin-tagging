@@ -4,6 +4,8 @@ declare const webviewApi: any;
 
 class CopytagsDialog {
   resultMessage: ResultMessage;
+  autocompleteCurrentFocus: number = -1;
+
   debounce(func: Function, timeout = 300) {
     let timer: any;
     return (...args: any[]) => {
