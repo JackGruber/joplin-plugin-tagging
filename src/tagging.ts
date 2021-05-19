@@ -26,12 +26,17 @@ export namespace tagging {
       } while (tags.has_more);
     }
 
+    for (const key in taggingInfo) {
+      if (taggingInfo[key]["count"] == noteIds.length) taggingInfo[key]["status"] = 1;
+      else taggingInfo[key]["status"] = 2;
+    }
+
     return taggingInfo;
   }
 
-  export async function processTags(noteIds: string[], tags, tagStatus) {
+  export async function processTags(noteIds: string[], tags, taggingInfo) {
     for (var key in tags) {
-      if (tags[key] != tagStatus[key]) {
+      if (tags[key] != taggingInfo[key]['status']) {
         if (tags[key] == 0) {
           // Remove Tag
           for (var i = 0; i < noteIds.length; i++) {

@@ -39,14 +39,12 @@ joplin.plugins.register({
           let tagStatus = [];
           const tag_list = [];
           for (const key in taggingInfo) {
-            if (taggingInfo[key]["count"] == noteIds.length) {
-              tagStatus[key] = 1;
+            if (taggingInfo[key]["status"] === 1) {
               tag_list.push(
                 `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${taggingInfo[key]["title"]} <br>`
               );
               tag_list.push(`<input type="hidden" name="${key}" value="1">`);
             } else {
-              tagStatus[key] = 2;
               tag_list.push(
                 `<input type="checkbox" value="2" tagId="${key}" class="tagCheckBox indeterminate" /> ${taggingInfo[key]["title"]} <br>`
               );
@@ -73,7 +71,7 @@ joplin.plugins.register({
 
           // process with tagging
           if (result["id"] == "ok") {
-            await tagging.processTags(noteIds, result["formData"]["tags"], tagStatus);
+            await tagging.processTags(noteIds, result["formData"]["tags"], taggingInfo);
           }
         }
       },
