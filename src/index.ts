@@ -33,47 +33,22 @@ joplin.plugins.register({
       execute: async () => {
         const noteIds = await joplin.workspace.selectedNoteIds();
         if (noteIds.length > 1) {
-          // collect all tags form the notes
-          let tags_on_notes = {};
-          for (let ids_pos = 0; ids_pos < noteIds.length; ids_pos++) {
-            var pageNum = 1;
-            do {
-              var tags = await joplin.data.get(
-                ["notes", noteIds[ids_pos], "tags"],
-                {
-                  fields: "id, title",
-                  limit: 20,
-                  page: pageNum++,
-                }
-              );
-              for (var tags_pos = 0; tags_pos < tags.items.length; tags_pos++) {
-                var tag_id = tags["items"][tags_pos]["id"];
-                if (typeof tags_on_notes[tag_id] === "undefined") {
-                  tags_on_notes[tag_id] = {};
-                  tags_on_notes[tag_id]["count"] = 1;
-                  tags_on_notes[tag_id]["title"] =
-                    tags["items"][tags_pos]["title"];
-                } else {
-                  tags_on_notes[tag_id]["count"]++;
-                }
-              }
-            } while (tags.has_more);
-          }
+          const taggingInfo = await tagging.getTaggingInfo(noteIds);
 
           // create tagging list
           let tagStatus = [];
           const tag_list = [];
-          for (var key in tags_on_notes) {
-            if (tags_on_notes[key]["count"] == noteIds.length) {
+          for (const key in taggingInfo) {
+            if (taggingInfo[key]["count"] == noteIds.length) {
               tagStatus[key] = 1;
               tag_list.push(
-                `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${tags_on_notes[key]["title"]} <br>`
+                `<input type="checkbox" tagId="${key}" class="tagCheckBox" value="1" checked="checked" /> ${taggingInfo[key]["title"]} <br>`
               );
               tag_list.push(`<input type="hidden" name="${key}" value="1">`);
             } else {
               tagStatus[key] = 2;
               tag_list.push(
-                `<input type="checkbox" value="2" tagId="${key}" class="tagCheckBox indeterminate" /> ${tags_on_notes[key]["title"]} <br>`
+                `<input type="checkbox" value="2" tagId="${key}" class="tagCheckBox indeterminate" /> ${taggingInfo[key]["title"]} <br>`
               );
               tag_list.push(`<input type="hidden" name="${key}" value="2">`);
             }

@@ -4,6 +4,31 @@ import { ResultMessage, TagResult, Tag, SearchMessage } from "./type";
 export let tagDialog: string;
 
 export namespace tagging {
+  export async function getTaggingInfo(noteIds: string[]): Promise<any> {
+    let taggingInfo = {};
+    for (const noteId of noteIds) {
+      var pageNum = 1;
+      do {
+        var tags = await joplin.data.get(["notes", noteId, "tags"], {
+          fields: "id, title",
+          limit: 20,
+          page: pageNum++,
+        });
+        for (const tag of tags.items) {
+          if (typeof taggingInfo[tag.id] === "undefined") {
+            taggingInfo[tag.id] = {};
+            taggingInfo[tag.id]["count"] = 1;
+            taggingInfo[tag.id]["title"] = tag.title;
+          } else {
+            taggingInfo[tag.id]["count"]++;
+          }
+        }
+      } while (tags.has_more);
+    }
+
+    return taggingInfo;
+  }
+
   export async function processTags(noteIds: string[], tags, tagStatus) {
     for (var key in tags) {
       if (tags[key] != tagStatus[key]) {
