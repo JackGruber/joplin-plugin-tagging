@@ -72,9 +72,9 @@ class CopytagsDialog {
   setOnClickEventTagCheckBox() {
     const tagCheckBox = document.getElementsByClassName("tagCheckBox");
     for (let i = 0; i < tagCheckBox.length; i++) {
-      tagCheckBox[i].addEventListener("click", (event) =>
+      tagCheckBox[i].addEventListener("click", (event) => {
         this.toggleTagCheckbox(event)
-      );
+      });
     }
   }
 
@@ -99,7 +99,9 @@ class CopytagsDialog {
         const item = document.createElement("div");
         item.setAttribute("tagId", tag.id);
         item.innerHTML = tag.title;
-        item.addEventListener("click", (event) => this.selectTag(event));
+        item.addEventListener("click", (event) => {
+          this.selectTag(event)
+        });
         autocompleteItems.appendChild(item);
       }
     }
