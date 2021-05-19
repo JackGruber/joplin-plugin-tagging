@@ -1,6 +1,6 @@
 import joplin from "api";
 import { MenuItemLocation } from "api/types";
-import { tagging } from "./tagging";
+import { tagging, tagDialog } from "./tagging";
 
 joplin.plugins.register({
   onStart: async function () {
@@ -24,9 +24,7 @@ joplin.plugins.register({
       MenuItemLocation.NoteListContextMenu
     );
 
-    const tagDialog = await joplin.views.dialogs.create("TagDialog");
-    await joplin.views.dialogs.addScript(tagDialog, "webview.js");
-    await joplin.views.dialogs.addScript(tagDialog, "webview.css");
+    await tagging.createDialog();
 
     await joplin.commands.register({
       name: "TaggingDialog",

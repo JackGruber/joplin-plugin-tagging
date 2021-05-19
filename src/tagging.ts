@@ -1,4 +1,5 @@
 import joplin from "api";
+export let tagDialog: string;
 
 export namespace tagging {
   export async function processDialogMsg(msg) {
@@ -35,5 +36,11 @@ export namespace tagging {
         } while (tags.has_more);
       }
     }
+  }
+
+  export async function createDialog() {
+    tagDialog = await joplin.views.dialogs.create("TagDialog");
+    await joplin.views.dialogs.addScript(tagDialog, "webview.js");
+    await joplin.views.dialogs.addScript(tagDialog, "webview.css");
   }
 }
