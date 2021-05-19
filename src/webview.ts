@@ -31,20 +31,22 @@ class CopytagsDialog {
     });
   }
 
-  navigateAutocompleteList(event) {
+  navigateAutocompleteList(event: KeyboardEvent) {
     let autocompleteListe = document.getElementById('autocomplete-list');
     if(!autocompleteListe) return;
     let autocompleteItems = autocompleteListe.getElementsByTagName('div');
-    if (event.keyCode == 40) {
-      this.autocompleteCurrentFocus ++;
-      this.markActive(autocompleteItems);
-    } else if (event.keyCode == 38) {
-      this.autocompleteCurrentFocus --;
-      this.markActive(autocompleteItems);
-    } else if (event.keyCode == 13) {
-      event.preventDefault(); // prevent default action (submitting form)
-      autocompleteItems[this.autocompleteCurrentFocus].click();
-      console.log("Enter")
+    console.log(event.key)
+    switch (event.key) {
+      case 'Up':
+      case 'Down':
+      case 'ArrowUp':
+      case 'ArrowDown':
+        this.autocompleteCurrentFocus = event.key === 'ArrowUp' || event.key === 'Up' ? this.autocompleteCurrentFocus - 1 : this.autocompleteCurrentFocus + 1;
+        this.markActive(autocompleteItems);
+        break;
+      case 'Enter':
+        autocompleteItems[this.autocompleteCurrentFocus].click();
+        break;
     }
   }
 
