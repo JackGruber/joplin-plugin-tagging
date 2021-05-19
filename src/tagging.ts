@@ -25,7 +25,7 @@ export namespace tagging {
       `
     <div id="copytags">
       <form name="tagSearch">
-        <div class="autocomplete">
+        <div class="autocomplete" id="autocomplete">
           <input id="query-input" type="text" name="addTag" placeholder="Tag search" autofocus>
         </div>
       </form>

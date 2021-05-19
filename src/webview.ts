@@ -88,7 +88,7 @@ class CopytagsDialog {
   }
 
   showTagSearch() {
-    const searchResults = document.getElementsByClassName("autocomplete")[0];
+    const searchResults = document.getElementById("autocomplete");
     this.removeAutocompleteItems();
     if (this.resultMessage) {
       const autocompleteItems = document.createElement("div");
