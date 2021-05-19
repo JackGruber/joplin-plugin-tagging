@@ -44,7 +44,6 @@ class CopytagsDialog {
     let autocompleteListe = document.getElementById('autocomplete-list');
     if(!autocompleteListe) return;
     let autocompleteItems = autocompleteListe.getElementsByTagName('div');
-    console.log(event.key)
     switch (event.key) {
       case 'Up':
       case 'Down':
