@@ -52,6 +52,8 @@ class CopytagsDialog {
         this.markActive(autocompleteItems);
         break;
       case 'Enter':
+      case ' ':
+        event.preventDefault();
         autocompleteItems[this.autocompleteCurrentFocus].click();
         break;
     }
