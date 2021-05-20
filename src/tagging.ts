@@ -1,5 +1,6 @@
 import joplin from "api";
 import { ResultMessage, TagResult, Tag, SearchMessage } from "./type";
+import * as naturalCompare from "string-natural-compare";
 
 export let tagDialog: string;
 
@@ -122,6 +123,11 @@ export namespace tagging {
     for (const tag of result.items) {
       tagResult.push({ id: tag.id, title: tag.title });
     }
+
+    tagResult.sort((a, b) => {
+      return naturalCompare(a.title, b.title, { caseInsensitive: true });
+    });
+
     return tagResult;
   }
 
