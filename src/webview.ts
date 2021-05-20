@@ -57,7 +57,6 @@ class CopytagsDialog {
         this.autocompleteCurrentFocus = event.key === 'ArrowUp' || event.key === 'Up' ? this.autocompleteCurrentFocus - 1 : this.autocompleteCurrentFocus + 1;
         this.markActive(autocompleteItems);
         break;
-      case ' ':
       case 'Enter':
         event.preventDefault();
         if(this.autocompleteCurrentFocus === -1) {
