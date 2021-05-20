@@ -60,10 +60,10 @@ class CopytagsDialog {
       case 'Enter':
         event.preventDefault();
         if(this.autocompleteCurrentFocus === -1) {
-          this.clearSearchField();
-          return;
+            autocompleteItems[1].click();
+        } else {
+          autocompleteItems[this.autocompleteCurrentFocus].click();
         }
-        autocompleteItems[this.autocompleteCurrentFocus].click();
         break;
     }
   }
