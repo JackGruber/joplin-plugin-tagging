@@ -60,7 +60,7 @@ class CopytagsDialog {
       case 'Enter':
         event.preventDefault();
         if(this.autocompleteCurrentFocus === -1) {
-            autocompleteItems[1].click();
+            autocompleteItems[0].click();
         } else {
           autocompleteItems[this.autocompleteCurrentFocus].click();
         }
