@@ -18,6 +18,7 @@ class CopytagsDialog {
     this.setCheckboxIndeterminate();
     this.setOnClickEventTagCheckBox();
     this.setSearchBoxEvent();
+    this.setFocus();
 
     // Remove autocomplete items on document click
     document.addEventListener("click", (event) => {
@@ -185,6 +186,10 @@ class CopytagsDialog {
     for (const item of items) {
       item.parentNode.removeChild(item);
     }
+  }
+
+  setFocus() {
+    document.getElementById("query-input").focus();
   }
 }
 
