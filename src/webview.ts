@@ -31,7 +31,11 @@ class CopytagsDialog {
     ) as HTMLInputElement;
 
     document.addEventListener("input",(this.debounce(function (event) {
-      this.searchTag(queryInput.value);
+      if(queryInput.value.trim() === '') {
+        this.clearSearchField();
+      } else {
+        this.searchTag(queryInput.value);
+      }
     }, 250)));
 
     queryInput.addEventListener("keydown", (event) => {
