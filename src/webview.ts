@@ -16,7 +16,7 @@ class CopytagsDialog {
 
   constructor() {
     this.setCheckboxIndeterminate();
-    this.setOnClickEventTagCheckBox();
+    this.setOnClickEventTagAllCheckBox();
     this.setSearchBoxEvent();
     this.setFocus();
 
@@ -125,13 +125,17 @@ class CopytagsDialog {
     return false;
   }
 
-  setOnClickEventTagCheckBox() {
+  setOnClickEventTagAllCheckBox() {
     const tagCheckBox = document.getElementsByClassName("tagCheckBox");
     for (let i = 0; i < tagCheckBox.length; i++) {
-      tagCheckBox[i].addEventListener("click", (event) => {
-        this.toggleTagCheckbox(event)
-      });
+      this.setOnClickEventTagCheckBox(tagCheckBox[i]);
     }
+  }
+
+  setOnClickEventTagCheckBox(checkBox: Element) {
+    checkBox.addEventListener("click", (event) => {
+      this.toggleTagCheckbox(event)
+    });
   }
 
   async searchTag(query: string) {
@@ -170,8 +174,8 @@ class CopytagsDialog {
     const tagId = element.getAttribute("tagId");
     const tagTitle = element.getAttribute("tagTitle");
     this.clearSearchField();
-    console.log(tagId)
-    console.log(tagTitle)
+
+    this.addTag(tagId, tagTitle)
   }
 
   clearSearchField() {
@@ -190,6 +194,31 @@ class CopytagsDialog {
 
   setFocus() {
     document.getElementById("query-input").focus();
+  }
+
+  addTag(tagId: string, tagTitle: string) {
+    const assignedTags = document.getElementById("assignedTags")
+    const label = document.createElement("label");
+    label.innerHTML = tagTitle;
+    
+    const tagCheckbox = document.createElement("input");
+    tagCheckbox.setAttribute("type", "checkbox");
+    tagCheckbox.setAttribute("value", "1");
+    tagCheckbox.checked = true;
+    tagCheckbox.setAttribute("tagId", tagId);
+    tagCheckbox.setAttribute("class", "tagCheckBox");
+    
+    const hiddenInput = document.createElement("input");
+    hiddenInput.setAttribute("type", "hidden");
+    hiddenInput.setAttribute("name", tagId);
+    hiddenInput.setAttribute("value", "1");
+    
+    const tagDiv = document.createElement("div");  
+    tagDiv.appendChild(hiddenInput);
+    tagDiv.appendChild(tagCheckbox);
+    tagDiv.appendChild(label);
+    this.setOnClickEventTagCheckBox(tagCheckbox);
+    assignedTags.appendChild(tagDiv);
   }
 }
 
