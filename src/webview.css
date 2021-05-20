@@ -9,7 +9,7 @@
   display: block;
   flex-direction: column;
   min-width: 300px;
-  min-height: 400px;
+  min-height: 430px;
   overflow-wrap: break-word;
   font-size: var(--joplin-font-size);
   font-family: var(--joplin-font-family);

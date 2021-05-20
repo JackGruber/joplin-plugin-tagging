@@ -5,6 +5,7 @@ declare const webviewApi: any;
 class CopytagsDialog {
   resultMessage: ResultMessage;
   autocompleteCurrentFocus: number = -1;
+  searchText: string;
 
   debounce(func: Function, timeout = 300) {
     let timer: any;
@@ -139,9 +140,10 @@ class CopytagsDialog {
   }
 
   async searchTag(query: string) {
+    this.searchText = query;
     this.resultMessage = await webviewApi.postMessage({
       type: "tagSearch",
-      query: query,
+      query: this.searchText,
     } as TagSearch);
 
     this.showTagSearch();
@@ -149,6 +151,7 @@ class CopytagsDialog {
 
   showTagSearch() {
     const searchResults = document.getElementById("autocomplete");
+    let createTag = true;
     this.removeAutocompleteItems();
     this.autocompleteCurrentFocus = -1;
     if (this.resultMessage) {
@@ -165,6 +168,19 @@ class CopytagsDialog {
           this.selectTag(event)
         });
         autocompleteItems.appendChild(item);
+        if(tag.title.toLowerCase() === this.searchText.trim().toLowerCase()) createTag = false;
+      }
+
+      if(createTag === true) {
+        const createTag = document.createElement("div");
+        const title = this.searchText.trim();
+        createTag.setAttribute("tagId", "new");
+        createTag.setAttribute("tagTitle", title);
+        createTag.innerHTML = "<strong>Create tag:</strong> " + title;
+        createTag.addEventListener("click", (event) => {
+          this.selectTag(event)
+        });
+        autocompleteItems.insertBefore(createTag, autocompleteItems.firstChild);
       }
     }
   }
@@ -182,6 +198,7 @@ class CopytagsDialog {
     this.removeAutocompleteItems();
     const searchResults = <HTMLInputElement>document.getElementById("query-input");
     searchResults.value = '';
+    this.searchText = '';
   }
 
   removeAutocompleteItems() {
@@ -200,6 +217,10 @@ class CopytagsDialog {
     const assignedTags = document.getElementById("assignedTags")
     const label = document.createElement("label");
     label.innerHTML = tagTitle;
+
+    if(tagId == 'new') {
+      tagId = "new_" + tagTitle
+    }
     
     const tagCheckbox = document.createElement("input");
     tagCheckbox.setAttribute("type", "checkbox");

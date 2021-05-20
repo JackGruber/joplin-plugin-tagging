@@ -81,7 +81,18 @@ export namespace tagging {
 
   export async function processTags(noteIds: string[], tags, taggingInfo) {
     for (var key in tags) {
-      if (tags[key] != taggingInfo[key]['status']) {
+      // new tag
+      if(key.substring(0, 4) === "new_") {
+        const title = key.substring(4);
+        const newTag = await joplin.data.post(["tags"], null, {
+          title: title,
+        });
+        for (var i = 0; i < noteIds.length; i++) {
+          await joplin.data.post(["tags", newTag.id, "notes"], null, {
+            id: noteIds[i],
+          });
+        }
+      } else if (tags[key] != taggingInfo[key]['status']) {
         if (tags[key] == 0) {
           // Remove Tag
           for (var i = 0; i < noteIds.length; i++) {
