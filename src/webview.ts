@@ -160,9 +160,13 @@ class CopytagsDialog {
       searchResults.appendChild(autocompleteItems);
       for (const tag of this.resultMessage.result) {
         const item = document.createElement("div");
+        const searchEscaped = this.searchText.trim().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        const regex = new RegExp("(" + searchEscaped + ")", "i");
+        const htmlTitle = tag.title.replace(regex, "<b>$1</b>");
+
         item.setAttribute("tagId", tag.id);
         item.setAttribute("tagTitle", tag.title);
-        item.innerHTML = tag.title;
+        item.innerHTML = htmlTitle;
         item.addEventListener("click", (event) => {
           this.selectTag(event)
         });
