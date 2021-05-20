@@ -26,7 +26,7 @@ export namespace tagging {
       `
     <div id="copytags">
       <div class="autocomplete" id="autocomplete">
-          <textarea id="query-input" rows="1" cols="25" name="addTag" placeholder="Tag search"></textarea>
+          <textarea id="query-input" rows="1" name="addTag" placeholder="Tag search"></textarea>
           <!-- <input id="query-input" type="text" name="addTag" placeholder="Tag search"> -->
         </div>
       <ul id="search-results"></ul>
