@@ -32,7 +32,7 @@ joplin.plugins.register({
       enabledCondition: "noteListHasNotes",
       execute: async () => {
         const noteIds = await joplin.workspace.selectedNoteIds();
-        if (noteIds.length > 1) {
+        if (noteIds.length > 0) {
           const taggingInfo = await tagging.getTaggingInfo(noteIds);
 
           const result = await tagging.showTaggingDialog(taggingInfo);
