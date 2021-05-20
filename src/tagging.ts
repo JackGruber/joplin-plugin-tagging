@@ -114,19 +114,40 @@ export namespace tagging {
   }
 
   export async function searchTag(query: string): Promise<Tag[]> {
+    const maxTags = 10;
     let tagResult = [];
-    query = query + "*";
-    var result = await joplin.data.get(["search"], {
-      query: query,
+    let result = await joplin.data.get(["search"], {
+      query: query + "*",
       type: "tag",
       fields: "id,title",
-      limit: 10,
+      limit: maxTags,
       sort: "title ASC",
     });
 
     for (const tag of result.items) {
       tagResult.push({ id: tag.id, title: tag.title });
     }
+
+    if(tagResult.length < maxTags) {
+      let result = await joplin.data.get(["search"], {
+        query: "*" + query + "*",
+        type: "tag",
+        fields: "id,title",
+        limit: maxTags*2,
+        sort: "title ASC",
+      });
+
+      for (const tag of result.items) {
+        if(tagResult.map(t=>t.title).indexOf(tag.title) === -1) {
+          tagResult.push({ id: tag.id, title: tag.title });
+        }
+
+        if(tagResult.length >= maxTags) {
+          break;
+        }
+      }  
+    }
+
 
     tagResult.sort((a, b) => {
       return naturalCompare(a.title, b.title, { caseInsensitive: true });
