@@ -28,7 +28,7 @@ joplin.plugins.register({
 
     await joplin.commands.register({
       name: "TaggingDialog",
-      label: "Tagging list",
+      label: "Tagging dialog",
       enabledCondition: "noteListHasNotes",
       execute: async () => {
         const noteIds = await joplin.workspace.selectedNoteIds();
