@@ -119,7 +119,7 @@ export namespace tagging {
   ): Promise<ResultMessage> {
     let result = null;
     if (msg.type === "tagSearch") {
-      const tags = await searchTag(msg.query);
+      const tags = await searchTag(msg.query, msg.exclude);
       result = {
         type: "tagResult",
         result: tags,
@@ -128,19 +128,23 @@ export namespace tagging {
     return result;
   }
 
-  export async function searchTag(query: string): Promise<Tag[]> {
+  export async function searchTag(query: string, exclude: string[]): Promise<Tag[]> {
     const maxTags = 10;
     let tagResult = [];
     let result = await joplin.data.get(["search"], {
       query: query + "*",
       type: "tag",
       fields: "id,title",
-      limit: maxTags,
+      limit: maxTags + exclude.length,
       sort: "title ASC",
     });
 
     for (const tag of result.items) {
-      tagResult.push({ id: tag.id, title: tag.title });
+      if(exclude.indexOf(tag.id) === -1) {
+        tagResult.push({ id: tag.id, title: tag.title });
+      }
+
+      if(tagResult.length == maxTags) break;
     }
 
     if(tagResult.length < maxTags) {
@@ -148,12 +152,12 @@ export namespace tagging {
         query: "*" + query + "*",
         type: "tag",
         fields: "id,title",
-        limit: maxTags*2,
+        limit: maxTags*2 + exclude.length,
         sort: "title ASC",
       });
 
       for (const tag of result.items) {
-        if(tagResult.map(t=>t.title).indexOf(tag.title) === -1) {
+        if(tagResult.map(t=>t.title).indexOf(tag.title) === -1 && exclude.indexOf(tag.id) === -1) {
           tagResult.push({ id: tag.id, title: tag.title });
         }
 

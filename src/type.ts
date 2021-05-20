@@ -1,6 +1,7 @@
 type TagSearch = {
     type: 'tagSearch',
     query: string,
+    exclude: string[],
 };
 
 type TagResult = {
