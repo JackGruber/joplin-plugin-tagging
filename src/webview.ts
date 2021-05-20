@@ -10,7 +10,6 @@ class CopytagsDialog {
     let timer: any;
     return (...args: any[]) => {
         clearTimeout(timer);
-        console.log("clear")
         timer = setTimeout(() => { func.apply(this, args); }, timeout);
     };
   }
