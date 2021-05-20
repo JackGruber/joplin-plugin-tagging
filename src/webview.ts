@@ -51,7 +51,6 @@ class CopytagsDialog {
         this.autocompleteCurrentFocus = event.key === 'ArrowUp' || event.key === 'Up' ? this.autocompleteCurrentFocus - 1 : this.autocompleteCurrentFocus + 1;
         this.markActive(autocompleteItems);
         break;
-      case 'Enter':
       case ' ':
         event.preventDefault();
         autocompleteItems[this.autocompleteCurrentFocus].click();
@@ -160,12 +159,15 @@ class CopytagsDialog {
     const element = event.target;
     const tagId = element.getAttribute("tagId");
     const tagTitle = element.getAttribute("tagTitle");
+    const searchResults = <HTMLInputElement>document.getElementById("query-input");
+    searchResults.value = '';
     console.log(tagId)
     console.log(tagTitle)
   }
 
   removeAutocompleteItems() {
     const items = document.getElementsByClassName("autocomplete-items");
+    this.autocompleteCurrentFocus = -1;
     for (const item of items) {
       item.parentNode.removeChild(item);
     }
