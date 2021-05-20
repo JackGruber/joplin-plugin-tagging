@@ -7,7 +7,7 @@ export let tagDialog: string;
 export namespace tagging {
   export async function showTaggingDialog(taggingInfo) {
     const tagList = [];
-    
+    const tagListmax = 40;
     for (const key in taggingInfo) {
       let status = taggingInfo[key]["status"];
       let tag = [];
@@ -22,6 +22,9 @@ export namespace tagging {
       tag.push(`<label>${taggingInfo[key]["title"]}<label>`)
       tag.push(`</div>`)
       tagList.push(tag.join(' '));
+      if(tagList.length == tagListmax) {
+        break;
+      }
     }
 
     await joplin.views.dialogs.setHtml(
@@ -38,6 +41,7 @@ export namespace tagging {
           <div id="assignedTags">
             ${tagList.join("\n")}
           </div>
+          ${tagList.length == tagListmax? '</br><div style="text-align:center"><b>Too many tags!</b></div>': ''}
         </form>
       <div>
     </div>
