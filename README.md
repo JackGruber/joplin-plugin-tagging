@@ -39,6 +39,7 @@ Copies all tags of the first marked note to all other marked notes.
 - Now you can remove a tag from all notes or add a tag to all notes, when the tag is not applied to all notes.
 
    <img src=img/tagging_dialog.jpg>
+   <img src=img/tagging_dialog_search.jpg>
 
 ## Keyboard Shortcuts
 
