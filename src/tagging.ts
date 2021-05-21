@@ -159,6 +159,7 @@ export namespace tagging {
   ): Promise<Tag[]> {
     const maxTags = 10;
     let tagResult = [];
+    query = query.trim();
 
     // Best match
     let result = await searchTag(query, maxTags + exclude.length);
