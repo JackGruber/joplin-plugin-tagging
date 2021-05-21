@@ -54,6 +54,12 @@ Keep in mind that doing so will overwrite all the framework-related files **outs
 
 ## Changelog
 
+
+- Rename Plugin to `Tagging`
+- Rename `Tagging list` command to `Tagging dialog`
+- Add: Tag search on tagging dialog
+- Add: Tag creation on tagging dialog
+
 ### v0.3.2 (2021-01-08)
 
 - Fix: Missing js File in JPL
