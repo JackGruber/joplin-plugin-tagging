@@ -83,14 +83,16 @@ export namespace tagging {
     for (var key in tags) {
       // new tag
       if(key.substring(0, 4) === "new_") {
-        const title = key.substring(4);
-        const newTag = await joplin.data.post(["tags"], null, {
-          title: title,
-        });
-        for (var i = 0; i < noteIds.length; i++) {
-          await joplin.data.post(["tags", newTag.id, "notes"], null, {
-            id: noteIds[i],
+          if(tags[key] == 1) {
+          const title = key.substring(4);
+          const newTag = await joplin.data.post(["tags"], null, {
+            title: title,
           });
+          for (var i = 0; i < noteIds.length; i++) {
+            await joplin.data.post(["tags", newTag.id, "notes"], null, {
+              id: noteIds[i],
+            });
+          }
         }
       } else if (taggingInfo[key] === undefined || tags[key] != taggingInfo[key]['status']) {
         if (tags[key] == 0) {
