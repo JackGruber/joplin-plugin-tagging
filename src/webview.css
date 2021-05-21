@@ -70,3 +70,10 @@
   background-color: DodgerBlue !important;
   color: #ffffff;
 }
+
+#tagwarning {
+  color: #ff0000;
+  font-weight: bold;
+  text-align: center;
+  margin: 10px;
+}

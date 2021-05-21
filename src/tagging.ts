@@ -46,7 +46,12 @@ export namespace tagging {
     dialogDiv.appendChild(autocompleteDiv);
     dialogDiv.appendChild(form);
 
-    //${tagList.length == tagListmax? '</br><div style="text-align:center"><b>Too many tags!</b></div>': ''}
+    if(tagList.length == tagListmax) {
+      const warning = document.createElement("div");
+      warning.setAttribute("id", "tagwarning")
+      warning.innerHTML = "Too many tags!";
+      dialogDiv.appendChild(warning);
+    }
 
     await joplin.views.dialogs.setHtml(tagDialog, dialogDiv.outerHTML);
     joplin.views.panels.onMessage(tagDialog, async (msg) =>
