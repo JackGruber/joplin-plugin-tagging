@@ -132,7 +132,7 @@ export namespace tagging {
   ): Promise<ResultMessage> {
     let result = null;
     if (msg.type === "tagSearch") {
-      const tags = await searchTag(msg.query, msg.exclude);
+      const tags = await getTags(msg.query, msg.exclude);
       result = {
         type: "tagResult",
         result: tags,
@@ -141,20 +141,27 @@ export namespace tagging {
     return result;
   }
 
-  export async function searchTag(
+  export async function searchTag(query: string, limit: number): Promise <any> {
+    const result = await joplin.data.get(["search"], {
+      query: query,
+      type: "tag",
+      fields: "id,title",
+      limit: limit,
+      sort: "title ASC",
+    });
+
+    return result;
+  }
+
+  export async function getTags(
     query: string,
     exclude: string[]
   ): Promise<Tag[]> {
     const maxTags = 10;
     let tagResult = [];
-    let result = await joplin.data.get(["search"], {
-      query: query + "*",
-      type: "tag",
-      fields: "id,title",
-      limit: maxTags + exclude.length,
-      sort: "title ASC",
-    });
 
+    // Best match
+    let result = await searchTag(query, maxTags + exclude.length);
     for (const tag of result.items) {
       if (exclude.indexOf(tag.id) === -1) {
         tagResult.push({ id: tag.id, title: tag.title });
@@ -163,15 +170,19 @@ export namespace tagging {
       if (tagResult.length == maxTags) break;
     }
 
-    if (tagResult.length < maxTags) {
-      let result = await joplin.data.get(["search"], {
-        query: "*" + query + "*",
-        type: "tag",
-        fields: "id,title",
-        limit: maxTags * 2 + exclude.length,
-        sort: "title ASC",
-      });
+    // match from start
+    result = await searchTag(query + "*", maxTags + exclude.length);
+    for (const tag of result.items) {
+      if (exclude.indexOf(tag.id) === -1) {
+        tagResult.push({ id: tag.id, title: tag.title });
+      }
 
+      if (tagResult.length == maxTags) break;
+    }
+
+    // 
+    if (tagResult.length < maxTags) {
+      result = await searchTag("*" + query + "*", maxTags + exclude.length);
       for (const tag of result.items) {
         if (
           tagResult.map((t) => t.title).indexOf(tag.title) === -1 &&
