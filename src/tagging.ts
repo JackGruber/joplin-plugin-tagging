@@ -174,7 +174,10 @@ export namespace tagging {
     // match from start
     result = await searchTag(query + "*", maxTags + exclude.length);
     for (const tag of result.items) {
-      if (exclude.indexOf(tag.id) === -1) {
+      if (
+        tagResult.map((t) => t.title).indexOf(tag.title) === -1 &&
+        exclude.indexOf(tag.id) === -1
+      ) {
         tagResult.push({ id: tag.id, title: tag.title });
       }
 
