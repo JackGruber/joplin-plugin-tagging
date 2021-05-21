@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.1 (2021-05-21)
+
+- Fix: Dialog colors on theme change
+
 ## v1.0.0 (2021-05-21)
 
 - Rename Plugin to `Tagging`
