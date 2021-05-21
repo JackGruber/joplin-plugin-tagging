@@ -1,6 +1,6 @@
 # Joplin Tagging Plugin
 
-Plugin to extend the Joplin tagging menu with a coppy all tags and tagging list with more control.
+Plugin to extend the Joplin tagging menu with a coppy all tags and a tagging dialog with more control.
 
 <img src=img/main.jpg>
 
@@ -28,7 +28,7 @@ Copies all tags of the first marked note to all other marked notes.
 
 Select on or more notes, click on `Tools > Tagging dialog` or use the command `Tagging dialog` from the context menu.
 
-- Add tags to from notes
+- Add tags to notes
 - Remove tags from notes
 - Create new tags
 
