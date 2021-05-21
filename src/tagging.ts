@@ -1,6 +1,7 @@
 import joplin from "api";
 import { ResultMessage, TagResult, Tag, SearchMessage } from "./type";
 import * as naturalCompare from "string-natural-compare";
+import { createTagHTML } from "./html"
 
 export let tagDialog: string;
 
@@ -9,44 +10,39 @@ export namespace tagging {
     const tagList = [];
     const tagListmax = 40;
     for (const key in taggingInfo) {
-      let status = taggingInfo[key]["status"];
-      let tag = [];
-      tag.push('<div>')
-      tag.push(`<input type="hidden" name="${key}" value="${status}">`)
-      tag.push(`<input type="checkbox" tagId="${key}" value="${status}"`);
-      if (status === 1) {
-        tag.push('checked="checked" class="tagCheckBox">')
-      } else {
-        tag.push('class="tagCheckBox indeterminate">')
-      }
-      tag.push(`<label>${taggingInfo[key]["title"]}<label>`)
-      tag.push(`</div>`)
-      tagList.push(tag.join(' '));
+      tagList.push(await createTagHTML(key, taggingInfo[key]["status"], taggingInfo[key]["title"]));
       if(tagList.length == tagListmax) {
         break;
       }
     }
 
-    await joplin.views.dialogs.setHtml(
-      tagDialog,
-      `
-    <div id="copytags">
-      <div class="autocomplete" id="autocomplete">
-          <textarea id="query-input" rows="1" name="addTag" placeholder="Tag search"></textarea>
-          <!-- <input id="query-input" type="text" name="addTag" placeholder="Tag search"> -->
-        </div>
-      <ul id="search-results"></ul>
-      <div>
-        <form name="tags">
-          <div id="assignedTags">
-            ${tagList.join("\n")}
-          </div>
-          ${tagList.length == tagListmax? '</br><div style="text-align:center"><b>Too many tags!</b></div>': ''}
-        </form>
-      <div>
-    </div>
-    `
-    );
+    const dialogDiv = document.createElement("div");
+    dialogDiv.setAttribute("id", "copytags");
+    const autocompleteDiv = document.createElement("div");
+    autocompleteDiv.setAttribute("id", "autocomplete");
+    autocompleteDiv.setAttribute("class", "autocomplete");
+
+    const searchBox = document.createElement("textarea");
+    searchBox.setAttribute("id", "query-input");
+    searchBox.setAttribute("rows", "1");
+    searchBox.setAttribute("name", "addTag");
+    searchBox.setAttribute("placeholder", "Tag search");
+    autocompleteDiv.appendChild(searchBox);
+
+    const form = document.createElement("form");
+    form.setAttribute("name", "tags");
+
+    const assignedTags = document.createElement("div");
+    assignedTags.setAttribute("id", "assignedTags");
+    assignedTags.innerHTML = tagList.join("\n");
+    form.appendChild(assignedTags);
+
+    dialogDiv.appendChild(autocompleteDiv);
+    dialogDiv.appendChild(form);
+
+    //${tagList.length == tagListmax? '</br><div style="text-align:center"><b>Too many tags!</b></div>': ''}
+
+    await joplin.views.dialogs.setHtml(tagDialog, dialogDiv.outerHTML);
     joplin.views.panels.onMessage(tagDialog, async (msg) =>
       tagging.processDialogMsg(msg)
     );

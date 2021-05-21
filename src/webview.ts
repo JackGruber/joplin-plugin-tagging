@@ -1,4 +1,5 @@
 import { TagSearch, ResultMessage, Tag } from "./type";
+import { createTagHTML, htmlToElem } from "./html"
 
 declare const webviewApi: any;
 
@@ -22,7 +23,6 @@ class CopytagsDialog {
     this.setSearchBoxEvent();
     this.storeAllTags();
     this.setFocus();
-
     // Remove autocomplete items on document click
     document.addEventListener("click", (event) => {
       this.removeAutocompleteItems();
@@ -104,34 +104,37 @@ class CopytagsDialog {
 
   toggleTagCheckbox(event) {
     const element = event.target;
-    const tagId = element.getAttribute("tagId");
+    const parent = element.parentNode;
+    const checkBox = parent.getElementsByClassName("tagcheckbox")[0]
+    const tagId = checkBox.getAttribute("tagId");
     const tagElement = document.getElementsByName(tagId)[0];
+
     // indeterminate checkbox
-    if (element.className.indexOf("indeterminate") !== -1) {
-      if (element.value == 1) {
-        element.indeterminate = true;
-        element.checked = false;
-        element.value = 2;
+    if (checkBox.className.indexOf("indeterminate") !== -1) {
+      if (checkBox.value == 1) {
+        checkBox.indeterminate = true;
+        checkBox.checked = false;
+        checkBox.value = 2;
         tagElement.setAttribute("value", "2");
-      } else if (element.value == 2) {
-        element.indeterminate = false;
-        element.checked = false;
-        element.value = 0;
+      } else if (checkBox.value == 2) {
+        checkBox.indeterminate = false;
+        checkBox.checked = false;
+        checkBox.value = 0;
         tagElement.setAttribute("value", "0");
       } else {
-        element.indeterminate = false;
-        element.checked = true;
-        element.value = 1;
+        checkBox.indeterminate = false;
+        checkBox.checked = true;
+        checkBox.value = 1;
         tagElement.setAttribute("value", "1");
       }
     } else {
-      if (element.value == 1) {
-        element.checked = false;
-        element.value = 0;
+      if (checkBox.value == 1) {
+        checkBox.checked = false;
+        checkBox.value = 0;
         tagElement.setAttribute("value", "0");
       } else {
-        element.checked = true;
-        element.value = 1;
+        checkBox.checked = true;
+        checkBox.value = 1;
         tagElement.setAttribute("value", "1");
       }
     }
@@ -139,13 +142,14 @@ class CopytagsDialog {
   }
 
   setOnClickEventTagAllCheckBox() {
-    const tagCheckBox = document.getElementsByClassName("tagCheckBox");
-    for (let i = 0; i < tagCheckBox.length; i++) {
-      this.setOnClickEventTagCheckBox(tagCheckBox[i]);
+    const tagClass = document.getElementsByClassName("tag");
+    for (let i = 0; i < tagClass.length; i++) {
+      this.setOnClickEvenForCheckbox(tagClass[i].getElementsByTagName("input")[0]);
+      this.setOnClickEvenForCheckbox(tagClass[i].getElementsByTagName("label")[0]);
     }
   }
 
-  setOnClickEventTagCheckBox(checkBox: Element) {
+  setOnClickEvenForCheckbox(checkBox: Element) {
     checkBox.addEventListener("click", (event) => {
       this.toggleTagCheckbox(event)
     });
@@ -239,25 +243,13 @@ class CopytagsDialog {
       tagId = "new_" + tagTitle
     }
     this.allTagsIds.push(tagId);
-    
-    const tagCheckbox = document.createElement("input");
-    tagCheckbox.setAttribute("type", "checkbox");
-    tagCheckbox.setAttribute("value", "1");
-    tagCheckbox.checked = true;
-    tagCheckbox.setAttribute("tagId", tagId);
-    tagCheckbox.setAttribute("class", "tagCheckBox");
-    
-    const hiddenInput = document.createElement("input");
-    hiddenInput.setAttribute("type", "hidden");
-    hiddenInput.setAttribute("name", tagId);
-    hiddenInput.setAttribute("value", "1");
-    
-    const tagDiv = document.createElement("div");  
-    tagDiv.appendChild(hiddenInput);
-    tagDiv.appendChild(tagCheckbox);
-    tagDiv.appendChild(label);
-    this.setOnClickEventTagCheckBox(tagCheckbox);
-    assignedTags.appendChild(tagDiv);
+
+    const tag = htmlToElem ( createTagHTML(tagId, 1, tagTitle) );
+    assignedTags.appendChild(tag);
+
+    const tagElement = assignedTags.getElementsByClassName("tag")
+    this.setOnClickEvenForCheckbox(tagElement[ tagElement.length -1].getElementsByTagName("input")[0]);
+    this.setOnClickEvenForCheckbox(tagElement[ tagElement.length -1].getElementsByTagName("label")[0]);
   }
 }
 
