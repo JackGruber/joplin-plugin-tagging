@@ -1,6 +1,6 @@
 import joplin from "api";
 import { MenuItemLocation } from "api/types";
-import { tagging, tagDialog } from "./tagging";
+import { tagging } from "./tagging";
 
 joplin.plugins.register({
   onStart: async function () {
