@@ -2,7 +2,7 @@
 
 Plugin to extend the Joplin tagging menu with a coppy all tags and tagging list with more control.
 
-<img src=img/main_tagging.jpg>
+<img src=img/main.jpg>
 
 ## Installation
 
@@ -33,6 +33,7 @@ Select on or more notes, click on `Tools > Tagging dialog` or use the command `T
 - Create new tags
 
    <img src=img/tagging_dialog.jpg>
+   <img src=img/tagging_dialog_search.jpg>
 
 ## Keyboard Shortcuts
 
