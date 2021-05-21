@@ -96,7 +96,7 @@ export namespace tagging {
             id: noteIds[i],
           });
         }
-      } else if (tags[key] != taggingInfo[key]['status']) {
+      } else if (taggingInfo[key] === undefined || tags[key] != taggingInfo[key]['status']) {
         if (tags[key] == 0) {
           // Remove Tag
           for (var i = 0; i < noteIds.length; i++) {
