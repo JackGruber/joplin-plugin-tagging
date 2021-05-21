@@ -4,7 +4,7 @@ import { tagging } from "./tagging";
 
 joplin.plugins.register({
   onStart: async function () {
-    console.info("CopyAllTag plugin started");
+    console.info("Tagging plugin started");
 
     await joplin.commands.register({
       name: "CopyAllTags",
