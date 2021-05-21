@@ -1,7 +1,7 @@
 import joplin from "api";
 import { ResultMessage, TagResult, Tag, SearchMessage } from "./type";
 import * as naturalCompare from "string-natural-compare";
-import { createTagHTML } from "./html"
+import { createTagHTML } from "./html";
 
 export let tagDialog: string;
 
@@ -10,8 +10,14 @@ export namespace tagging {
     const tagList = [];
     const tagListmax = 40;
     for (const key in taggingInfo) {
-      tagList.push(await createTagHTML(key, taggingInfo[key]["status"], taggingInfo[key]["title"]));
-      if(tagList.length == tagListmax) {
+      tagList.push(
+        await createTagHTML(
+          key,
+          taggingInfo[key]["status"],
+          taggingInfo[key]["title"]
+        )
+      );
+      if (tagList.length == tagListmax) {
         break;
       }
     }
@@ -72,7 +78,8 @@ export namespace tagging {
     }
 
     for (const key in taggingInfo) {
-      if (taggingInfo[key]["count"] == noteIds.length) taggingInfo[key]["status"] = 1;
+      if (taggingInfo[key]["count"] == noteIds.length)
+        taggingInfo[key]["status"] = 1;
       else taggingInfo[key]["status"] = 2;
     }
 
@@ -82,8 +89,8 @@ export namespace tagging {
   export async function processTags(noteIds: string[], tags, taggingInfo) {
     for (var key in tags) {
       // new tag
-      if(key.substring(0, 4) === "new_") {
-          if(tags[key] == 1) {
+      if (key.substring(0, 4) === "new_") {
+        if (tags[key] == 1) {
           const title = key.substring(4);
           const newTag = await joplin.data.post(["tags"], null, {
             title: title,
@@ -94,7 +101,10 @@ export namespace tagging {
             });
           }
         }
-      } else if (taggingInfo[key] === undefined || tags[key] != taggingInfo[key]['status']) {
+      } else if (
+        taggingInfo[key] === undefined ||
+        tags[key] != taggingInfo[key]["status"]
+      ) {
         if (tags[key] == 0) {
           // Remove Tag
           for (var i = 0; i < noteIds.length; i++) {
@@ -126,7 +136,10 @@ export namespace tagging {
     return result;
   }
 
-  export async function searchTag(query: string, exclude: string[]): Promise<Tag[]> {
+  export async function searchTag(
+    query: string,
+    exclude: string[]
+  ): Promise<Tag[]> {
     const maxTags = 10;
     let tagResult = [];
     let result = await joplin.data.get(["search"], {
@@ -138,33 +151,35 @@ export namespace tagging {
     });
 
     for (const tag of result.items) {
-      if(exclude.indexOf(tag.id) === -1) {
+      if (exclude.indexOf(tag.id) === -1) {
         tagResult.push({ id: tag.id, title: tag.title });
       }
 
-      if(tagResult.length == maxTags) break;
+      if (tagResult.length == maxTags) break;
     }
 
-    if(tagResult.length < maxTags) {
+    if (tagResult.length < maxTags) {
       let result = await joplin.data.get(["search"], {
         query: "*" + query + "*",
         type: "tag",
         fields: "id,title",
-        limit: maxTags*2 + exclude.length,
+        limit: maxTags * 2 + exclude.length,
         sort: "title ASC",
       });
 
       for (const tag of result.items) {
-        if(tagResult.map(t=>t.title).indexOf(tag.title) === -1 && exclude.indexOf(tag.id) === -1) {
+        if (
+          tagResult.map((t) => t.title).indexOf(tag.title) === -1 &&
+          exclude.indexOf(tag.id) === -1
+        ) {
           tagResult.push({ id: tag.id, title: tag.title });
         }
 
-        if(tagResult.length >= maxTags) {
+        if (tagResult.length >= maxTags) {
           break;
         }
-      }  
+      }
     }
-
 
     tagResult.sort((a, b) => {
       return naturalCompare(a.title, b.title, { caseInsensitive: true });

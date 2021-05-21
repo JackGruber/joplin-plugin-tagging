@@ -1,5 +1,5 @@
 import { TagSearch, ResultMessage, Tag } from "./type";
-import { createTagHTML, htmlToElem } from "./html"
+import { createTagHTML, htmlToElem } from "./html";
 
 declare const webviewApi: any;
 
@@ -12,8 +12,10 @@ class CopytagsDialog {
   debounce(func: Function, timeout = 300) {
     let timer: any;
     return (...args: any[]) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { func.apply(this, args); }, timeout);
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
     };
   }
 
@@ -31,11 +33,11 @@ class CopytagsDialog {
 
   storeAllTags() {
     this.allTagsIds = [];
-    const assignedTagsDiv = document.getElementById('assignedTags');
-    const inputs = assignedTagsDiv.getElementsByTagName('input');
-    for(const input of inputs) {
-      if(input.getAttribute('type') == 'checkbox') {
-        this.allTagsIds.push(input.getAttribute('tagId'));
+    const assignedTagsDiv = document.getElementById("assignedTags");
+    const inputs = assignedTagsDiv.getElementsByTagName("input");
+    for (const input of inputs) {
+      if (input.getAttribute("type") == "checkbox") {
+        this.allTagsIds.push(input.getAttribute("tagId"));
       }
     }
   }
@@ -45,13 +47,16 @@ class CopytagsDialog {
       "query-input"
     ) as HTMLInputElement;
 
-    document.addEventListener("input",(this.debounce(function (event) {
-      if(queryInput.value.trim() === '') {
-        this.clearSearchField();
-      } else {
-        this.searchTag(queryInput.value);
-      }
-    }, 250)));
+    document.addEventListener(
+      "input",
+      this.debounce(function (event) {
+        if (queryInput.value.trim() === "") {
+          this.clearSearchField();
+        } else {
+          this.searchTag(queryInput.value);
+        }
+      }, 250)
+    );
 
     queryInput.addEventListener("keydown", (event) => {
       this.navigateAutocompleteList(event);
@@ -59,21 +64,24 @@ class CopytagsDialog {
   }
 
   navigateAutocompleteList(event: KeyboardEvent) {
-    let autocompleteListe = document.getElementById('autocomplete-list');
-    if(!autocompleteListe) return;
-    let autocompleteItems = autocompleteListe.getElementsByTagName('div');
+    let autocompleteListe = document.getElementById("autocomplete-list");
+    if (!autocompleteListe) return;
+    let autocompleteItems = autocompleteListe.getElementsByTagName("div");
     switch (event.key) {
-      case 'Up':
-      case 'Down':
-      case 'ArrowUp':
-      case 'ArrowDown':
-        this.autocompleteCurrentFocus = event.key === 'ArrowUp' || event.key === 'Up' ? this.autocompleteCurrentFocus - 1 : this.autocompleteCurrentFocus + 1;
+      case "Up":
+      case "Down":
+      case "ArrowUp":
+      case "ArrowDown":
+        this.autocompleteCurrentFocus =
+          event.key === "ArrowUp" || event.key === "Up"
+            ? this.autocompleteCurrentFocus - 1
+            : this.autocompleteCurrentFocus + 1;
         this.markActive(autocompleteItems);
         break;
-      case 'Enter':
+      case "Enter":
         event.preventDefault();
-        if(this.autocompleteCurrentFocus === -1) {
-            autocompleteItems[0].click();
+        if (this.autocompleteCurrentFocus === -1) {
+          autocompleteItems[0].click();
         } else {
           autocompleteItems[this.autocompleteCurrentFocus].click();
         }
@@ -90,8 +98,10 @@ class CopytagsDialog {
   markActive(x) {
     if (!x) return false;
     this.removeActive(x);
-    if (this.autocompleteCurrentFocus >= x.length) this.autocompleteCurrentFocus = 0;
-    if (this.autocompleteCurrentFocus < 0) this.autocompleteCurrentFocus = (x.length - 1);
+    if (this.autocompleteCurrentFocus >= x.length)
+      this.autocompleteCurrentFocus = 0;
+    if (this.autocompleteCurrentFocus < 0)
+      this.autocompleteCurrentFocus = x.length - 1;
     x[this.autocompleteCurrentFocus].classList.add("autocomplete-active");
   }
 
@@ -105,7 +115,7 @@ class CopytagsDialog {
   toggleTagCheckbox(event) {
     const element = event.target;
     const parent = element.parentNode;
-    const checkBox = parent.getElementsByClassName("tagcheckbox")[0]
+    const checkBox = parent.getElementsByClassName("tagcheckbox")[0];
     const tagId = checkBox.getAttribute("tagId");
     const tagElement = document.getElementsByName(tagId)[0];
 
@@ -144,14 +154,18 @@ class CopytagsDialog {
   setOnClickEventTagAllCheckBox() {
     const tagClass = document.getElementsByClassName("tag");
     for (let i = 0; i < tagClass.length; i++) {
-      this.setOnClickEvenForCheckbox(tagClass[i].getElementsByTagName("input")[0]);
-      this.setOnClickEvenForCheckbox(tagClass[i].getElementsByTagName("label")[0]);
+      this.setOnClickEvenForCheckbox(
+        tagClass[i].getElementsByTagName("input")[0]
+      );
+      this.setOnClickEvenForCheckbox(
+        tagClass[i].getElementsByTagName("label")[0]
+      );
     }
   }
 
   setOnClickEvenForCheckbox(checkBox: Element) {
     checkBox.addEventListener("click", (event) => {
-      this.toggleTagCheckbox(event)
+      this.toggleTagCheckbox(event);
     });
   }
 
@@ -160,7 +174,7 @@ class CopytagsDialog {
     this.resultMessage = await webviewApi.postMessage({
       type: "tagSearch",
       query: this.searchText,
-      exclude: this.allTagsIds
+      exclude: this.allTagsIds,
     } as TagSearch);
 
     this.showTagSearch();
@@ -178,7 +192,9 @@ class CopytagsDialog {
       searchResults.appendChild(autocompleteItems);
       for (const tag of this.resultMessage.result) {
         const item = document.createElement("div");
-        const searchEscaped = this.searchText.trim().replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        const searchEscaped = this.searchText
+          .trim()
+          .replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
         const regex = new RegExp("(" + searchEscaped + ")", "i");
         const htmlTitle = tag.title.replace(regex, "<b>$1</b>");
 
@@ -186,20 +202,24 @@ class CopytagsDialog {
         item.setAttribute("tagTitle", tag.title);
         item.innerHTML = htmlTitle;
         item.addEventListener("click", (event) => {
-          this.selectTag(event)
+          this.selectTag(event);
         });
         autocompleteItems.appendChild(item);
-        if(tag.title.toLowerCase() === this.searchText.trim().toLowerCase()) createTag = false;
+        if (tag.title.toLowerCase() === this.searchText.trim().toLowerCase())
+          createTag = false;
       }
 
       const title = this.searchText.trim();
-      if(createTag === true && this.allTagsIds.indexOf("new_" + title) === -1) {
+      if (
+        createTag === true &&
+        this.allTagsIds.indexOf("new_" + title) === -1
+      ) {
         const createTag = document.createElement("div");
         createTag.setAttribute("tagId", "new");
         createTag.setAttribute("tagTitle", title);
         createTag.innerHTML = "<strong>Create tag:</strong> " + title;
         createTag.addEventListener("click", (event) => {
-          this.selectTag(event)
+          this.selectTag(event);
         });
         autocompleteItems.insertBefore(createTag, autocompleteItems.firstChild);
       }
@@ -212,14 +232,16 @@ class CopytagsDialog {
     const tagTitle = element.getAttribute("tagTitle");
     this.clearSearchField();
 
-    this.addTag(tagId, tagTitle)
+    this.addTag(tagId, tagTitle);
   }
 
   clearSearchField() {
     this.removeAutocompleteItems();
-    const searchResults = <HTMLInputElement>document.getElementById("query-input");
-    searchResults.value = '';
-    this.searchText = '';
+    const searchResults = <HTMLInputElement>(
+      document.getElementById("query-input")
+    );
+    searchResults.value = "";
+    this.searchText = "";
   }
 
   removeAutocompleteItems() {
@@ -235,21 +257,25 @@ class CopytagsDialog {
   }
 
   addTag(tagId: string, tagTitle: string) {
-    const assignedTags = document.getElementById("assignedTags")
+    const assignedTags = document.getElementById("assignedTags");
     const label = document.createElement("label");
     label.innerHTML = tagTitle;
-    
-    if(tagId == 'new') {
-      tagId = "new_" + tagTitle
+
+    if (tagId == "new") {
+      tagId = "new_" + tagTitle;
     }
     this.allTagsIds.push(tagId);
 
-    const tag = htmlToElem ( createTagHTML(tagId, 1, tagTitle) );
+    const tag = htmlToElem(createTagHTML(tagId, 1, tagTitle));
     assignedTags.appendChild(tag);
 
-    const tagElement = assignedTags.getElementsByClassName("tag")
-    this.setOnClickEvenForCheckbox(tagElement[ tagElement.length -1].getElementsByTagName("input")[0]);
-    this.setOnClickEvenForCheckbox(tagElement[ tagElement.length -1].getElementsByTagName("label")[0]);
+    const tagElement = assignedTags.getElementsByClassName("tag");
+    this.setOnClickEvenForCheckbox(
+      tagElement[tagElement.length - 1].getElementsByTagName("input")[0]
+    );
+    this.setOnClickEvenForCheckbox(
+      tagElement[tagElement.length - 1].getElementsByTagName("label")[0]
+    );
   }
 }
 

@@ -10,7 +10,7 @@ joplin.plugins.register({
       name: "CopyAllTags",
       label: "Copy all tags",
       enabledCondition: "noteListHasNotes",
-      execute: async () => tagging.copyAllTags() ,
+      execute: async () => tagging.copyAllTags(),
     });
 
     await joplin.views.menuItems.create(
@@ -38,7 +38,11 @@ joplin.plugins.register({
           const result = await tagging.showTaggingDialog(taggingInfo);
 
           if (result["id"] == "ok") {
-            await tagging.processTags(noteIds, result["formData"]["tags"], taggingInfo);
+            await tagging.processTags(
+              noteIds,
+              result["formData"]["tags"],
+              taggingInfo
+            );
           }
         }
       },
