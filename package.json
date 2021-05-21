@@ -1,9 +1,9 @@
 {
   "name": "joplin-plugin-copytags",
-  "version": "0.3.3",
+  "version": "1.0.0",
   "description": "Plugin to extend the Joplin tagging menu with a coppy all tags and tagging list with more control.",
   "scripts": {
-    "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config createArchive",
+    "dist": "webpack --joplin-plugin-config buildMain && webpack --joplin-plugin-config buildExtraScripts && webpack --joplin-plugin-config webview && webpack --joplin-plugin-config createArchive",
     "prepare": "npm run dist",
     "update": "npm install -g generator-joplin && yo joplin --update"
   },
@@ -24,5 +24,8 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "yargs": "^16.2.0"
+  },
+  "dependencies": {
+    "string-natural-compare": "^3.0.1"
   }
 }
