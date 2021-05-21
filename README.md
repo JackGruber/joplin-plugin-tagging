@@ -60,6 +60,8 @@ To update the plugin framework, run `npm run update`
 
 ## Changelog
 
+### v1.0.0 (2021-05-21)
+
 - Rename Plugin to `Tagging`
 - Rename `Tagging list` command to `Tagging dialog`
 - Add: Tag search on tagging dialog
