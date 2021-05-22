@@ -1,4 +1,4 @@
-import { TagSearch, ResultMessage, Tag } from "./type";
+import { TagSearch, ResultMessage } from "./type";
 import { createTagHTML, htmlToElem } from "./html";
 
 declare const webviewApi: any;
