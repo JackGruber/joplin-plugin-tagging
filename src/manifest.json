@@ -8,5 +8,10 @@
   "author": "JackGruber",
   "homepage_url": "https://github.com/JackGruber/joplin-plugin-tagging/blob/master/README.md",
   "repository_url": "https://github.com/JackGruber/joplin-plugin-tagging",
-  "keywords": ["duplicate", "copy", "tags", "tagging", "tag"]
+  "keywords": ["duplicate", "copy", "tags", "tagging", "tag"],
+  "categories": ["productivity"],
+  "screenshots": [],
+  "icons": {
+    "256": "img/icon_256.png"
+  }
 }
