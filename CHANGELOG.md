@@ -1,5 +1,9 @@
 # Changelog
 
+## not released
+
+- Add: Screenshots / icon for [https://joplinapp.org/plugins/](https://joplinapp.org/plugins/)
+
 ## v1.0.1 (2021-05-21)
 
 - Fix: Dialog colors on theme change

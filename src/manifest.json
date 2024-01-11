@@ -10,7 +10,20 @@
   "repository_url": "https://github.com/JackGruber/joplin-plugin-tagging",
   "keywords": ["duplicate", "copy", "tags", "tagging", "tag"],
   "categories": ["productivity"],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "src": "img/main_tagging.gif",
+      "label": "Screenshot: Showing the tagging function"
+    },
+    {
+      "src": "img/showcase1.png",
+      "label": "Screenshot: Search tags"
+    },
+    {
+      "src": "img/showcase2.png",
+      "label": "Screenshot: Multiple notes tagged"
+    }
+  ],
   "icons": {
     "256": "img/icon_256.png"
   }
