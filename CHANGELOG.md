@@ -2,6 +2,8 @@
 
 ## not released
 
+## v1.0.2 (2024-01-11)
+
 - Add: Screenshots / icon for [https://joplinapp.org/plugins/](https://joplinapp.org/plugins/)
 
 ## v1.0.1 (2021-05-21)
