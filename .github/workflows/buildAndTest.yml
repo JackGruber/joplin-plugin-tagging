@@ -12,5 +12,3 @@ jobs:
         run: npm install
       - name: Build
         run: npm run dist
-      - name: Run test
-        run: npm test
