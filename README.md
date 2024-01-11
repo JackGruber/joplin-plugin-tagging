@@ -1,4 +1,4 @@
-# Joplin Tagging Plugin
+# Joplin Tagging Plugin <img src=img/icon_32.png>
 
 Plugin to extend the Joplin tagging menu with a copy all tags and a tagging dialog with more control.
 

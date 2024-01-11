@@ -46,9 +46,9 @@ export namespace tagging {
     dialogDiv.appendChild(autocompleteDiv);
     dialogDiv.appendChild(form);
 
-    if(tagList.length == tagListmax) {
+    if (tagList.length == tagListmax) {
       const warning = document.createElement("div");
-      warning.setAttribute("id", "tagwarning")
+      warning.setAttribute("id", "tagwarning");
       warning.innerHTML = "Too many tags!";
       dialogDiv.appendChild(warning);
     }
@@ -141,7 +141,7 @@ export namespace tagging {
     return result;
   }
 
-  export async function searchTag(query: string, limit: number): Promise <any> {
+  export async function searchTag(query: string, limit: number): Promise<any> {
     const result = await joplin.data.get(["search"], {
       query: query,
       type: "tag",
@@ -184,7 +184,7 @@ export namespace tagging {
       if (tagResult.length == maxTags) break;
     }
 
-    // 
+    //
     if (tagResult.length < maxTags) {
       result = await searchTag("*" + query + "*", maxTags + exclude.length);
       for (const tag of result.items) {

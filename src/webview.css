@@ -32,7 +32,7 @@
   border-radius: 3px;
 }
 .autocomplete textarea:focus {
-  outline: none;  
+  outline: none;
 }
 .autocomplete textarea[type="text"] {
   background-color: var(--joplin-background-color);
