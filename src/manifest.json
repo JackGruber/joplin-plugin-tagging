@@ -9,7 +9,7 @@
   "homepage_url": "https://github.com/JackGruber/joplin-plugin-tagging/blob/master/README.md",
   "repository_url": "https://github.com/JackGruber/joplin-plugin-tagging",
   "keywords": ["duplicate", "copy", "tags", "tagging", "tag"],
-  "categories": ["productivity"],
+  "categories": ["productivity", "tags"],
   "screenshots": [
     {
       "src": "img/main_tagging.gif",
