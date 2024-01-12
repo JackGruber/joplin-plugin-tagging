@@ -2,6 +2,8 @@
 
 ## not released
 
+- Fix: Missing file in jpl after update to generator-joplin@2.13.3
+
 ## v1.0.2 (2024-01-11)
 
 - Add: Screenshots / icon for [https://joplinapp.org/plugins/](https://joplinapp.org/plugins/)
