@@ -4,6 +4,25 @@ Plugin to extend the Joplin tagging menu with a copy all tags and a tagging dial
 
 <img src=img/main_tagging.gif>
 
+<!-- prettier-ignore-start -->
+
+<!-- TOC -->
+
+- [Installation](#installation)
+    - [Automatic](#automatic)
+    - [Manual](#manual)
+        - [Manual via file system](#manual-via-file-system)
+        - [Manual via file via GUI](#manual-via-file-via-gui)
+- [Commands](#commands)
+    - [Copy all tags](#copy-all-tags)
+    - [Tagging dialog](#tagging-dialog)
+- [Keyboard Shortcuts](#keyboard-shortcuts)
+- [Changelog](#changelog)
+
+<!-- /TOC -->
+
+<!-- prettier-ignore-end -->
+
 ## Installation
 
 ### Automatic
