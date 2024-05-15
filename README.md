@@ -69,8 +69,8 @@ Select on or more notes, click on `Tools > Tagging dialog` or use the command `T
 - Remove tags from notes
 - Create new tags
 
-   <img src=img/tagging_dialog.jpg>
-   <img src=img/tagging_dialog_search.jpg>
+   <img src=img/tagging_dialog.png>
+   <img src=img/tagging_dialog_search.png>
 
 ## Keyboard Shortcuts
 
