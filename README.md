@@ -60,10 +60,6 @@ Under `Options > Keyboard Shortcuts` you can assign a keyboard shortcut for the 
 - `Copy all tags`
 - `Tagging dialog`
 
-## Updating the plugin framework
-
-To update the plugin framework, run `npm run update`
-
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
