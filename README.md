@@ -11,8 +11,8 @@ Plugin to extend the Joplin tagging menu with a copy all tags and a tagging dial
 - [Installation](#installation)
     - [Automatic](#automatic)
     - [Manual](#manual)
+        - [Manual via GUI](#manual-via-gui)
         - [Manual via file system](#manual-via-file-system)
-        - [Manual via file via GUI](#manual-via-file-via-gui)
 - [Commands](#commands)
     - [Copy all tags](#copy-all-tags)
     - [Tagging dialog](#tagging-dialog)
@@ -32,7 +32,9 @@ Plugin to extend the Joplin tagging menu with a copy all tags and a tagging dial
 - Click Install plugin
 - Restart Joplin to enable the plugin
 
-### Manual via GUI
+### Manual
+
+#### Manual via GUI
 
 - Download the latest released JPL package (`io.github.jackgruber.copytags.jpl`) from [here](https://github.com/JackGruber/joplin-plugin-copytags/releases/latest)
 - Go to `Tools > Options > Plugins` in Joplin
@@ -40,22 +42,12 @@ Plugin to extend the Joplin tagging menu with a copy all tags and a tagging dial
 - Select the downloaded JPL file
 - Restart Joplin
 
-### Manual via file system
-
 #### Manual via file system
 
 - Download the latest released JPL package (`io.github.jackgruber.copytags.jpl`) from [here](https://github.com/JackGruber/joplin-plugin-copytags/releases/latest)
 - Close Joplin
 - Got to your Joplin profile folder and place the JPL file in the `plugins` folder
 - Start Joplin
-
-#### Manual via file via GUI
-
-- Download the latest released JPL package (`io.github.jackgruber.copytags.jpl`) from [here](https://github.com/JackGruber/joplin-plugin-copytags/releases/latest)
-- Go to `Tools > Options > Plugins`
-- Click on the gear wheel and select `Install from file`
-- Select the downloaded JPL file
-- Restart Joplin
 
 ## Commands
 
