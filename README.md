@@ -50,10 +50,6 @@ Under `Options > Keyboard Shortcuts` you can assign a keyboard shortcut for the 
 - `Copy all tags`
 - `Tagging dialog`
 
-## Build
-
-To build your one version of the plugin, install node.js and run the following command `npm run dist`
-
 ## Updating the plugin framework
 
 To update the plugin framework, run `npm run update`
@@ -61,10 +57,3 @@ To update the plugin framework, run `npm run update`
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
-
-## Links
-
-- [Joplin - Getting started with plugin development](https://joplinapp.org/api/get_started/plugins/)
-- [Joplin - Plugin API reference](https://joplinapp.org/api/references/plugin_api/classes/joplin.html)
-- [Joplin - Data API reference](https://joplinapp.org/api/references/rest_api/)
-- [Joplin - Plugin examples](https://github.com/laurent22/joplin/tree/dev/packages/app-cli/tests/support/plugins)
